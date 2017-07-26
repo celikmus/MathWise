@@ -13,7 +13,7 @@ const HomeStack = StackNavigator(
     }
   },
   {
-    headerMode: 'screen'
+    headerMode: 'none'
   }
 );
 
