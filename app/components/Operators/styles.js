@@ -26,6 +26,12 @@ const styles = EStyleSheet.create({
   },
   subtract: {
     backgroundColor: '$primaryBrown'
+  },
+  selected: {
+    backgroundColor: 'red'
+  },
+  notSelected: {
+    backgroundColor: 'gray'
   }
 });
 

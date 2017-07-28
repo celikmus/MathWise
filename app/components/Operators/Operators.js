@@ -6,36 +6,49 @@ import styles from './styles';
 const ICON_COLOR = '#fff';
 const ICON_SIZE = 48;
 
-const Header = () =>
-  <View style={styles.container}>
-    <TouchableOpacity style={[styles.icon, styles.division]}>
-      <MaterialCommunityIcons
-        name={'division'}
-        color={ICON_COLOR}
-        size={ICON_SIZE}
-      />
-    </TouchableOpacity>
-    <TouchableOpacity style={[styles.icon, styles.multiply]}>
-      <MaterialCommunityIcons
-        name={'close'}
-        color={ICON_COLOR}
-        size={ICON_SIZE}
-      />
-    </TouchableOpacity>
-    <TouchableOpacity style={[styles.icon, styles.sum]}>
-      <MaterialCommunityIcons
-        name={'plus'}
-        color={ICON_COLOR}
-        size={ICON_SIZE}
-      />
-    </TouchableOpacity>
-    <TouchableOpacity style={[styles.icon, styles.subtract]}>
-      <MaterialCommunityIcons
-        name={'minus'}
-        color={ICON_COLOR}
-        size={ICON_SIZE}
-      />
-    </TouchableOpacity>
-  </View>;
+const getStyle = (operator, selectedOperator) => {
+  const selectedStyle =
+    selectedOperator === operator ? styles.selected : styles.notSelected;
+  const style = [styles.icon, styles[operator], selectedStyle];
+  return style;
+};
 
-export default Header;
+const Operators = ({ selectedOperator = 'division' }) => {
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        activeOpacity={selectedOperator === 'division' ? 1 : 0.2}
+        style={getStyle('division', selectedOperator)}
+      >
+        <MaterialCommunityIcons
+          name={'division'}
+          color={ICON_COLOR}
+          size={ICON_SIZE}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={getStyle('multiply', selectedOperator)}>
+        <MaterialCommunityIcons
+          name={'close'}
+          color={ICON_COLOR}
+          size={ICON_SIZE}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={getStyle('sum', selectedOperator)}>
+        <MaterialCommunityIcons
+          name={'plus'}
+          color={ICON_COLOR}
+          size={ICON_SIZE}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={getStyle('subtract', selectedOperator)}>
+        <MaterialCommunityIcons
+          name={'minus'}
+          color={ICON_COLOR}
+          size={ICON_SIZE}
+        />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export default Operators;
