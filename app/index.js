@@ -9,7 +9,9 @@ EStyleSheet.build({
   $primaryBlue: '#191970',
   $primaryBrown: '#5e2612',
   $primaryGreen: '#04582f',
-  $primaryBlack: '#000'
+  $secondaryGreen: '#9ce5e0',
+  $primaryBlack: '#000',
+  $primaryGray: '#aaa'
   // outline: 1
 });
 

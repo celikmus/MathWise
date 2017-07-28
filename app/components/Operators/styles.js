@@ -1,6 +1,9 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
+  $underlayColor: '$primaryGray',
+  $iconColor: '#fff',
+  $iconSize: 48,
   container: {
     position: 'absolute',
     bottom: 0,
@@ -28,10 +31,10 @@ const styles = EStyleSheet.create({
     backgroundColor: '$primaryBrown'
   },
   selected: {
-    backgroundColor: 'red'
+    backgroundColor: '$primaryGreen'
   },
   notSelected: {
-    backgroundColor: 'gray'
+    backgroundColor: '$primaryGray'
   }
 });
 
