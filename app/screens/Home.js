@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
+import { Operators } from '../components/Operators';
 
 class Home extends Component {
   render() {
@@ -12,6 +13,7 @@ class Home extends Component {
         <StatusBar translucent={false} barStyle="light-content" />
         <Header />
         <Text>hello</Text>
+        <Operators />
       </Container>
     );
   }
