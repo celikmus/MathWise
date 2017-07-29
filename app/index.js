@@ -8,6 +8,7 @@ EStyleSheet.build({
   $primaryOrange: '#f08500',
   $primaryBlue: '#191970',
   $primaryBrown: '#5e2612',
+  $secondaryBrown: '#a24a21',
   $primaryGreen: '#04582f',
   $secondaryGreen: '#9ce5e0',
   $primaryBlack: '#000',
