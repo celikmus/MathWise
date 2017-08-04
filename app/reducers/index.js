@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
+import interactions from './interactions';
 
-const reducer = (state = {}, action) => state;
-
-export default combineReducers({ reducer });
+export default combineReducers({ interactions });
