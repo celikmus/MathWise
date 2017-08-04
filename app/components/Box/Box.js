@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, PanResponder } from 'react-native';
+import { Text, View, Animated, PanResponder } from 'react-native';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styles from './styles';
 
 class Box extends Component {
@@ -11,6 +13,10 @@ class Box extends Component {
     offsetLeft: 0
   };
 
+  static propTypes = {
+    dropZones: PropTypes.array.isRequired
+  };
+
   panResponder = {};
 
   componentWillMount() {
@@ -18,9 +24,19 @@ class Box extends Component {
       onStartShouldSetPanResponder: this.handleStartShouldSetPanResponder,
       onPanResponderGrant: this.handlePanResponderGrant,
       onPanResponderMove: this.handlePanResponderMove,
-      onPanResponderRelease: this.handlePanResponderEnd,
+      onPanResponderRelease: this.handlePanResponderRelease,
       onPanResponderTerminate: this.handlePanResponderEnd
     });
+  }
+
+  isDropZone(gesture) {
+    const { dropZones } = this.props;
+    const isIn = dropZones.some(
+      zone =>
+        gesture.moveY > zone.layout.y &&
+        gesture.moveY < zone.layout.y + zone.layout.height
+    );
+    return isIn;
   }
 
   handleStartShouldSetPanResponder = () => true;
@@ -36,16 +52,26 @@ class Box extends Component {
     });
   };
 
-  handlePanResponderEnd = (e, gestureState) => {
+  handlePanResponderRelease = (e, gestureState) => {
     const { initialTop, initialLeft } = this.state;
-    this.setState({
-      dragging: false,
-      initialTop: initialTop + gestureState.dy,
-      initialLeft: initialLeft + gestureState.dx,
-      offsetTop: 0,
-      offsetLeft: 0
-    });
+    console.log('released...');
+    if (this.isDropZone(gestureState)) {
+      this.setState({
+        showDraggable: false
+      });
+      console.log('is in!');
+    } else {
+      this.setState({
+        dragging: false,
+        initialTop: initialTop,
+        initialLeft: initialLeft,
+        offsetTop: 0,
+        offsetLeft: 0
+      });
+    }
   };
+
+  handlePanResponderEnd = () => true;
 
   render() {
     const {
@@ -66,12 +92,19 @@ class Box extends Component {
 
     return (
       <View style={styles.container}>
-        <View {...this.panResponder.panHandlers} style={[styles.square, style]}>
+        <Animated.View
+          {...this.panResponder.panHandlers}
+          style={[styles.square, style]}
+        >
           <Text style={styles.text}>DRAG ME</Text>
-        </View>
+        </Animated.View>
       </View>
     );
   }
 }
 
-export default Box;
+const select = state => ({
+  dropZones: state.interactions.dropZones
+});
+
+export default connect(select)(Box);
