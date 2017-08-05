@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Text, View, Animated, PanResponder } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addOperand } from '../../actions/interactions';
 import styles from './styles';
 
 class Box extends Component {
   state = {
     dragging: false,
+    showDraggable: true,
     initialTop: 50,
     initialLeft: 50,
     offsetTop: 0,
@@ -14,7 +16,8 @@ class Box extends Component {
   };
 
   static propTypes = {
-    dropZones: PropTypes.array.isRequired
+    dropZones: PropTypes.array.isRequired,
+    value: PropTypes.number.isRequired
   };
 
   panResponder = {};
@@ -29,14 +32,15 @@ class Box extends Component {
     });
   }
 
-  isDropZone(gesture) {
+  getDropZone(gesture) {
     const { dropZones } = this.props;
-    const isIn = dropZones.some(
-      zone =>
-        gesture.moveY > zone.layout.y &&
-        gesture.moveY < zone.layout.y + zone.layout.height
+    const zone = dropZones.find(
+      z =>
+        z.isEmpty &&
+        gesture.moveY > z.layout.y &&
+        gesture.moveY < z.layout.y + z.layout.height
     );
-    return isIn;
+    return zone;
   }
 
   handleStartShouldSetPanResponder = () => true;
@@ -52,14 +56,14 @@ class Box extends Component {
     });
   };
 
-  handlePanResponderRelease = (e, gestureState) => {
+  handlePanResponderRelease = (e, gesture) => {
     const { initialTop, initialLeft } = this.state;
-    console.log('released...');
-    if (this.isDropZone(gestureState)) {
+    const zone = this.getDropZone(gesture);
+    if (zone) {
       this.setState({
         showDraggable: false
       });
-      console.log('is in!');
+      this.props.dispatch(addOperand(zone.zoneId, this.props.value));
     } else {
       this.setState({
         dragging: false,
@@ -76,6 +80,7 @@ class Box extends Component {
   render() {
     const {
       dragging,
+      showDraggable,
       initialTop,
       initialLeft,
       offsetTop,
@@ -92,12 +97,16 @@ class Box extends Component {
 
     return (
       <View style={styles.container}>
-        <Animated.View
-          {...this.panResponder.panHandlers}
-          style={[styles.square, style]}
-        >
-          <Text style={styles.text}>DRAG ME</Text>
-        </Animated.View>
+        {showDraggable
+          ? <Animated.View
+              {...this.panResponder.panHandlers}
+              style={[styles.square, style]}
+            >
+              <Text style={styles.text}>
+                {this.props.value}
+              </Text>
+            </Animated.View>
+          : null}
       </View>
     );
   }

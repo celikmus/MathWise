@@ -2,8 +2,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
   square: {
-    width: 164,
-    height: 164,
+    width: 68,
+    height: 68,
     borderColor: '$secondaryBrown',
     borderWidth: 1,
     borderRadius: 4,

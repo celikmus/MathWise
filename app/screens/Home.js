@@ -22,7 +22,7 @@ class Home extends Component {
         </View>
         <Text>hello</Text>
         <View style={styles.draggableContainer}>
-          <Box />
+          <Box value={20} />
         </View>
         <Operators />
       </Container>
