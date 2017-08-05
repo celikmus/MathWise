@@ -37,8 +37,10 @@ class Box extends Component {
     const zone = dropZones.find(
       z =>
         z.isEmpty &&
-        gesture.moveY > z.layout.y &&
-        gesture.moveY < z.layout.y + z.layout.height
+        gesture.moveY > z.layout.y - styles.$boxBuffer &&
+        gesture.moveY < z.layout.y + styles.$boxBuffer + z.layout.height &&
+        gesture.moveX > z.layout.x - styles.$boxBuffer &&
+        gesture.moveX < z.layout.x + styles.$boxBuffer + z.layout.width
     );
     return zone;
   }

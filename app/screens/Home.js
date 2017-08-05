@@ -17,12 +17,16 @@ class Home extends Component {
         <Header />
         <View style={styles.dropContainer}>
           <DropBox>
-            <Text>Drop me here!</Text>
+            <Text>Drop here!</Text>
+          </DropBox>
+          <DropBox>
+            <Text>Drop here!</Text>
           </DropBox>
         </View>
         <Text>hello</Text>
         <View style={styles.draggableContainer}>
           <Box value={20} />
+          <Box value={15} />
         </View>
         <Operators />
       </Container>
