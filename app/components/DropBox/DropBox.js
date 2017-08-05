@@ -13,7 +13,8 @@ class DropBox extends Component {
   }
 
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    zones: PropTypes.array.isRequired
   };
 
   setDropZoneValues = event => {
@@ -22,12 +23,24 @@ class DropBox extends Component {
   };
 
   render() {
+    const zone = this.props.zones.find(z => z.zoneId === this.zoneId) || {};
+    const viewStyle = zone.isEmpty
+      ? [styles.square]
+      : [styles.square, styles.filled];
     return (
-      <View style={styles.square} onLayout={this.setDropZoneValues}>
-        <Text style={styles.text}>Drop here</Text>
+      <View style={viewStyle} onLayout={this.setDropZoneValues}>
+        {zone.isEmpty
+          ? <Text style={styles.text}>Drop here</Text>
+          : <Text style={[styles.text, styles.filledText]}>
+              {zone.value}
+            </Text>}
       </View>
     );
   }
 }
 
-export default connect()(DropBox);
+const select = state => ({
+  zones: state.interactions.dropZones || []
+});
+
+export default connect(select)(DropBox);
