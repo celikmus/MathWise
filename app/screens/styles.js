@@ -14,7 +14,12 @@ const styles = EStyleSheet.create({
     backgroundColor: 'red',
     position: 'absolute',
     top: 20,
-    width: '100%'
+    width: '100%',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 10,
+    paddingRight: 10
   },
   draggableContainer: {
     // backgroundColor: 'transparent',
@@ -24,7 +29,9 @@ const styles = EStyleSheet.create({
     bottom: 54,
     borderWidth: 1,
     borderColor: 'black',
-    zIndex: 2
+    zIndex: 2,
+    flexDirection: 'row',
+    flex: 1
   }
 });
 

@@ -9,8 +9,8 @@ class Box extends Component {
   state = {
     dragging: false,
     showDraggable: true,
-    initialTop: 50,
-    initialLeft: 50,
+    initialTop: styles.$initialTop,
+    initialLeft: styles.$initialLeft,
     offsetTop: 0,
     offsetLeft: 0
   };
@@ -97,20 +97,16 @@ class Box extends Component {
       left: initialLeft + offsetLeft
     };
 
-    return (
-      <View style={styles.container}>
-        {showDraggable
-          ? <Animated.View
-              {...this.panResponder.panHandlers}
-              style={[styles.square, style]}
-            >
-              <Text style={styles.text}>
-                {this.props.value}
-              </Text>
-            </Animated.View>
-          : null}
-      </View>
-    );
+    return showDraggable
+      ? <Animated.View
+          {...this.panResponder.panHandlers}
+          style={[styles.square, style]}
+        >
+          <Text style={styles.text}>
+            {this.props.value}
+          </Text>
+        </Animated.View>
+      : <View style={styles.emptySquare} />;
   }
 }
 

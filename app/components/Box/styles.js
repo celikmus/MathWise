@@ -8,18 +8,23 @@ const styles = EStyleSheet.create({
   $draggingBackground: '$secondaryBrown',
   $boxSize: 64,
   $boxBuffer: 20,
-  container: {
-    flex: 1
-  },
+  $initialTop: 0,
+  $initialLeft: 0,
+  $borderRadius: 4,
   square: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
     width: '$boxSize',
     height: '$boxSize',
-    borderRadius: 4,
+    borderRadius: '$borderRadius',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  emptySquare: {
+    width: '$boxSize',
+    height: '$boxSize',
+    backgroundColor: 'yellow',
+    top: '$initialTop',
+    left: '$initialLeft',
+    borderRadius: '$borderRadius'
   },
   text: {
     color: 'white',

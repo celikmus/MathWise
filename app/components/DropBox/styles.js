@@ -8,7 +8,8 @@ const styles = EStyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: 10
   },
   text: {
     color: 'white',
