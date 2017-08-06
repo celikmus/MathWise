@@ -2,14 +2,13 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
   square: {
-    width: 68,
-    height: 68,
+    width: '$boxSize',
+    height: '$boxSize',
     borderColor: '$secondaryBrown',
     borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: '$borderRadius',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10
+    alignItems: 'center'
   },
   text: {
     color: 'white',
@@ -19,7 +18,8 @@ const styles = EStyleSheet.create({
     backgroundColor: '$secondaryBrown'
   },
   filledText: {
-    fontWeight: '700'
+    fontWeight: '700',
+    fontSize: 28
   }
 });
 

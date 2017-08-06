@@ -2,15 +2,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
   $iconColor: '$primaryBlack',
-  $iconSize: 40,
-  container: {
-    flex: 1
-  },
-  dropZone: {
-    height: 64,
-    width: 64,
-    backgroundColor: '$primaryGray'
-  },
+  $iconSize: 28,
   dropContainer: {
     height: 100,
     backgroundColor: 'red',
@@ -20,6 +12,7 @@ const styles = EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-around',
     paddingLeft: 10,
     paddingRight: 10
   },
