@@ -1,6 +1,8 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
+  $iconColor: '$primaryBlack',
+  $iconSize: 40,
   container: {
     flex: 1
   },
@@ -22,7 +24,6 @@ const styles = EStyleSheet.create({
     paddingRight: 10
   },
   draggableContainer: {
-    // backgroundColor: 'transparent',
     width: '100%',
     height: 300,
     position: 'absolute',
@@ -32,6 +33,17 @@ const styles = EStyleSheet.create({
     zIndex: 2,
     flexDirection: 'row',
     flex: 1
+  },
+  result: {
+    width: '$boxSize',
+    height: '$boxSize',
+    borderRadius: '$borderRadius',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  resultText: {
+    fontWeight: '700',
+    fontSize: 28
   }
 });
 

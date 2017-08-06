@@ -12,7 +12,9 @@ EStyleSheet.build({
   $primaryGreen: '#04582f',
   $secondaryGreen: '#9ce5e0',
   $primaryBlack: '#000',
-  $primaryGray: '#aaa'
+  $primaryGray: '#aaa',
+  $boxSize: 64,
+  $borderRadius: 4
   // outline: 1
 });
 

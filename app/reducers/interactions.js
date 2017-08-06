@@ -1,6 +1,7 @@
 import { ADD_DROP_ZONE, ADD_OPERAND } from '../actions/interactions';
 
 const initialState = {
+  selectedOperator: 'sum',
   dropZones: []
 };
 

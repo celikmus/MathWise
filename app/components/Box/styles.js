@@ -6,11 +6,9 @@ const boxBufer = 30;
 const styles = EStyleSheet.create({
   $backgroundColor: '$primaryBrown',
   $draggingBackground: '$secondaryBrown',
-  $boxSize: 64,
   $boxBuffer: 20,
   $initialTop: 0,
   $initialLeft: 0,
-  $borderRadius: 4,
   square: {
     width: '$boxSize',
     height: '$boxSize',
