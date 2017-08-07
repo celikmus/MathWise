@@ -34,19 +34,23 @@ class Home extends Component {
             <DropBox>
               <Text>Drop here!</Text>
             </DropBox>
-            <MaterialCommunityIcons
-              name={getIconName(this.props.selectedOperator)}
-              color={styles.$iconColor}
-              size={styles.$iconSize}
-            />
+            <View style={styles.operator}>
+              <MaterialCommunityIcons
+                name={getIconName(this.props.selectedOperator)}
+                color={styles.$iconColor}
+                size={styles.$iconSize}
+              />
+            </View>
             <DropBox>
               <Text>Drop here!</Text>
             </DropBox>
-            <MaterialCommunityIcons
-              name={getIconName('equal')}
-              color={styles.$iconColor}
-              size={styles.$iconSize}
-            />
+            <View style={styles.operator}>
+              <MaterialCommunityIcons
+                name={getIconName('equal')}
+                color={styles.$iconColor}
+                size={styles.$iconSize}
+              />
+            </View>
             <View style={styles.result}>
               <Text style={styles.resultText}>245</Text>
             </View>

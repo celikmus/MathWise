@@ -22,8 +22,6 @@ const styles = EStyleSheet.create({
     width: '$boxSize',
     height: '$boxSize',
     backgroundColor: 'yellow',
-    top: '$initialTop',
-    left: '$initialLeft',
     borderRadius: '$borderRadius'
   },
   text: {

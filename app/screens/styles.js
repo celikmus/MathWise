@@ -18,9 +18,13 @@ const styles = EStyleSheet.create({
     backgroundColor: 'red',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     paddingLeft: 10,
     paddingRight: 10
+  },
+  operator: {
+    width: 42,
+    alignItems: 'center'
   },
   result: {
     width: '$boxSize',

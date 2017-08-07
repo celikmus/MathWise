@@ -44,6 +44,7 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
+        vacatingZoneId: '',
         dropZones: rZones
       };
     case SET_VACATING_ZONE:

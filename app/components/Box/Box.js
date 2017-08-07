@@ -12,14 +12,15 @@ import styles from './styles';
 class Box extends Component {
   constructor(props) {
     super(props);
+    this.initTop = props.coords ? props.coords.y : styles.$initialTop;
+    this.initLeft = props.coords ? props.coords.x : styles.$initialLeft;
     this.state = {
       dragging: false,
-      showDraggable: true,
+      initialTop: this.initTop,
+      initialLeft: this.initLeft,
       offsetTop: 0,
       offsetLeft: 0
     };
-    this.initialTop = props.coords ? props.coords.y : styles.$initialTop;
-    this.initialLeft = props.coords ? props.coords.x : styles.$initialLeft;
   }
 
   static propTypes = {
@@ -61,35 +62,45 @@ class Box extends Component {
 
   handlePanResponderMove = (e, gestureState) => {
     const zone = this.getDropZone(gestureState);
-    zone && this.props.dispatch(setVacatingZone(zone.zoneId));
-    this.setState({
-      showDraggable: true,
-      dragging: true,
-      initialTop: this.initialTop,
-      initialLeft: this.initialLeft,
-      offsetTop: gestureState.dy,
-      offsetLeft: gestureState.dx
-    });
+    if (zone && !zone.isEmpty) {
+      this.props.dispatch(setVacatingZone(zone.zoneId));
+      this.setState({
+        dragging: true,
+        initialTop: zone.layout.y,
+        initialLeft: zone.layout.x,
+        offsetTop: gestureState.dy,
+        offsetLeft: gestureState.dx
+      });
+    } else {
+      // done --> drag to anywhere
+      this.setState((prevState, props) => ({
+        dragging: true,
+        initialTop: prevState.initialTop,
+        initialLeft: prevState.initialLeft,
+        offsetTop: gestureState.dy,
+        offsetLeft: gestureState.dx
+      }));
+    }
   };
 
   handlePanResponderRelease = (e, gesture) => {
     const zone = this.getDropZone(gesture);
     const { vacatingZoneId, dispatch } = this.props;
     if (zone) {
-      this.setState({
+      this.setState(() => ({
         dragging: false,
-        showDraggable: false,
-        initialTop: 0,
-        initialLeft: 0,
-        offsetTop: zone.layout.y + 20,
-        offsetLeft: zone.layout.x
-      });
+        initialTop: zone.layout.y - 100,
+        initialLeft: zone.layout.x,
+        offsetTop: 0,
+        offsetLeft: 0
+      }));
       zone.isEmpty && dispatch(addOperand(zone.zoneId, this.props.value));
     } else {
+      // done --> put back to init place
       this.setState({
         dragging: false,
-        initialTop: this.initialTop,
-        initialLeft: this.initialLeft,
+        initialTop: this.initTop,
+        initialLeft: this.initLeft,
         offsetTop: 0,
         offsetLeft: 0
       });
@@ -100,14 +111,20 @@ class Box extends Component {
   handlePanResponderEnd = () => true;
 
   render() {
-    const { dragging, showDraggable, offsetTop, offsetLeft } = this.state;
+    const {
+      dragging,
+      initialTop,
+      initialLeft,
+      offsetTop,
+      offsetLeft
+    } = this.state;
 
     const style = {
       backgroundColor: dragging
         ? styles.$draggingBackground
         : styles.$backgroundColor,
-      top: showDraggable ? this.initialTop + offsetTop : -100 + offsetTop / 2,
-      left: showDraggable ? this.initialLeft + offsetLeft : offsetLeft
+      top: initialTop + offsetTop,
+      left: initialLeft + offsetLeft
     };
 
     return (
@@ -120,7 +137,7 @@ class Box extends Component {
             {this.props.value}
           </Text>
         </Animated.View>
-        {!showDraggable && <View style={styles.emptySquare} />}
+        {/* {<View style={[style, styles.emptySquare]} />} */}
       </View>
     );
   }
