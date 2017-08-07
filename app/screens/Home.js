@@ -29,30 +29,32 @@ class Home extends Component {
       <Container backgroundColor={this.props.backgroundColor}>
         <StatusBar translucent={false} barStyle="light-content" />
         <Header />
-        <View style={styles.dropContainer}>
-          <DropBox>
-            <Text>Drop here!</Text>
-          </DropBox>
-          <MaterialCommunityIcons
-            name={getIconName(this.props.selectedOperator)}
-            color={styles.$iconColor}
-            size={styles.$iconSize}
-          />
-          <DropBox>
-            <Text>Drop here!</Text>
-          </DropBox>
-          <MaterialCommunityIcons
-            name={getIconName('equal')}
-            color={styles.$iconColor}
-            size={styles.$iconSize}
-          />
-          <View style={styles.result}>
-            <Text style={styles.resultText}>245</Text>
+        <View style={styles.container}>
+          <View style={styles.dropContainer}>
+            <DropBox>
+              <Text>Drop here!</Text>
+            </DropBox>
+            <MaterialCommunityIcons
+              name={getIconName(this.props.selectedOperator)}
+              color={styles.$iconColor}
+              size={styles.$iconSize}
+            />
+            <DropBox>
+              <Text>Drop here!</Text>
+            </DropBox>
+            <MaterialCommunityIcons
+              name={getIconName('equal')}
+              color={styles.$iconColor}
+              size={styles.$iconSize}
+            />
+            <View style={styles.result}>
+              <Text style={styles.resultText}>245</Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.draggableContainer}>
-          <Box value={20} />
-          <Box value={15} />
+          <View>
+            <Box value={20} />
+            <Box value={15} />
+          </View>
         </View>
         <Operators />
       </Container>

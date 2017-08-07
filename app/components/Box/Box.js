@@ -62,8 +62,15 @@ class Box extends Component {
     const { initialTop, initialLeft } = this.state;
     const zone = this.getDropZone(gesture);
     if (zone) {
+      // this.setState({
+      //   showDraggable: false
+      // });
       this.setState({
-        showDraggable: false
+        dragging: false,
+        initialTop: zone.layout.y + 20,
+        initialLeft: zone.layout.x,
+        offsetTop: 0,
+        offsetLeft: 0
       });
       this.props.dispatch(addOperand(zone.zoneId, this.props.value));
     } else {

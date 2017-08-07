@@ -7,8 +7,8 @@ const styles = EStyleSheet.create({
   $backgroundColor: '$primaryBrown',
   $draggingBackground: '$secondaryBrown',
   $boxBuffer: 20,
-  $initialTop: 0,
-  $initialLeft: 0,
+  $initialTop: 200,
+  $initialLeft: 100,
   square: {
     width: '$boxSize',
     height: '$boxSize',

@@ -18,8 +18,10 @@ class DropBox extends Component {
   };
 
   setDropZoneValues = event => {
-    const { dispatch } = this.props;
-    dispatch(addDropZone(this.zoneId, event.nativeEvent.layout));
+    const { dispatch, zones } = this.props;
+    const alreadyCreated = zones.some(z => z.zoneId === this.zoneId);
+    !alreadyCreated &&
+      dispatch(addDropZone(this.zoneId, event.nativeEvent.layout));
   };
 
   render() {
