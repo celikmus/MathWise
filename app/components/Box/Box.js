@@ -89,7 +89,7 @@ class Box extends Component {
     if (zone) {
       this.setState(() => ({
         dragging: false,
-        initialTop: zone.layout.y - 100,
+        initialTop: zone.layout.y - styles.$containerHeight,
         initialLeft: zone.layout.x,
         offsetTop: 0,
         offsetLeft: 0

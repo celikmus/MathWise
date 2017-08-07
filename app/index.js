@@ -13,6 +13,7 @@ EStyleSheet.build({
   $secondaryGreen: '#9ce5e0',
   $primaryBlack: '#000',
   $primaryGray: '#aaa',
+  $dropContainerHeight: 100,
   $boxSize: 64,
   $borderRadius: 4
   // outline: 1

@@ -6,6 +6,7 @@ const boxBufer = 30;
 const styles = EStyleSheet.create({
   $backgroundColor: '$primaryBrown',
   $draggingBackground: '$secondaryBrown',
+  $containerHeight: '$dropContainerHeight',
   $boxBuffer: 20,
   $initialTop: 0,
   $initialLeft: 0,

@@ -14,7 +14,7 @@ const styles = EStyleSheet.create({
     flex: 1
   },
   dropContainer: {
-    height: 100,
+    height: '$dropContainerHeight',
     backgroundColor: 'red',
     flexDirection: 'row',
     alignItems: 'center',
