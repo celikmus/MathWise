@@ -38,7 +38,7 @@ const reducer = (state = initialState, action) => {
         let newZone = { ...zone };
         if (zone.zoneId === action.zoneId) {
           delete newZone.value;
-          newZone.isEmpty = false;
+          newZone.isEmpty = true;
         }
         return newZone;
       });

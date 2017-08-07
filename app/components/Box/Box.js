@@ -62,8 +62,10 @@ class Box extends Component {
 
   handlePanResponderMove = (e, gestureState) => {
     const zone = this.getDropZone(gestureState);
+    const { vacatingZoneId, dispatch } = this.props;
     if (zone && !zone.isEmpty) {
-      this.props.dispatch(setVacatingZone(zone.zoneId));
+      // TODO: Box disappearing when hovered over a filled zone...
+      !vacatingZoneId && dispatch(setVacatingZone(zone.zoneId));
       this.setState({
         dragging: true,
         offsetTop: gestureState.moveY,
@@ -73,8 +75,6 @@ class Box extends Component {
       // done --> drag to anywhere
       this.setState((prevState, props) => ({
         dragging: true,
-        initialTop: prevState.initialTop,
-        initialLeft: prevState.initialLeft,
         offsetTop: gestureState.dy,
         offsetLeft: gestureState.dx
       }));
@@ -85,7 +85,7 @@ class Box extends Component {
     const zone = this.getDropZone(gesture);
     const hasMoved = gesture.dx || gesture.dy;
     const { vacatingZoneId, dispatch } = this.props;
-    if (zone && hasMoved) {
+    if (zone && hasMoved && zone.isEmpty) {
       this.setState(() => ({
         dragging: false,
         initialTop: zone.layout.y - styles.$containerHeight,
@@ -93,7 +93,7 @@ class Box extends Component {
         offsetTop: 0,
         offsetLeft: 0
       }));
-      zone.isEmpty && dispatch(addOperand(zone.zoneId, this.props.value));
+      dispatch(addOperand(zone.zoneId, this.props.value));
     } else {
       // done --> put back to init place
       this.setState({

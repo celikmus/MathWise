@@ -14,6 +14,7 @@ EStyleSheet.build({
   $primaryBlack: '#000',
   $primaryGray: '#aaa',
   $dropContainerHeight: 100,
+  $dropZoneBuffer: 30,
   $boxSize: 64,
   $borderRadius: 4
   // outline: 1
