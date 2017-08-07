@@ -66,10 +66,8 @@ class Box extends Component {
       this.props.dispatch(setVacatingZone(zone.zoneId));
       this.setState({
         dragging: true,
-        initialTop: zone.layout.y,
-        initialLeft: zone.layout.x,
-        offsetTop: gestureState.dy,
-        offsetLeft: gestureState.dx
+        offsetTop: gestureState.moveY,
+        offsetLeft: gestureState.moveX
       });
     } else {
       // done --> drag to anywhere
@@ -85,8 +83,9 @@ class Box extends Component {
 
   handlePanResponderRelease = (e, gesture) => {
     const zone = this.getDropZone(gesture);
+    const hasMoved = gesture.dx || gesture.dy;
     const { vacatingZoneId, dispatch } = this.props;
-    if (zone) {
+    if (zone && hasMoved) {
       this.setState(() => ({
         dragging: false,
         initialTop: zone.layout.y - styles.$containerHeight,
