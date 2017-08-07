@@ -14,8 +14,8 @@ EStyleSheet.build({
   $primaryBlack: '#000',
   $primaryGray: '#aaa',
   $boxSize: 64,
-  $borderRadius: 4
-  // outline: 1
+  $borderRadius: 4,
+  outline: 1
 });
 
 export default () =>

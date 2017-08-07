@@ -7,14 +7,16 @@ const styles = EStyleSheet.create({
   $backgroundColor: '$primaryBrown',
   $draggingBackground: '$secondaryBrown',
   $boxBuffer: 20,
-  $initialTop: 200,
-  $initialLeft: 100,
+  $initialTop: 0,
+  $initialLeft: 0,
   square: {
+    position: 'absolute',
     width: '$boxSize',
     height: '$boxSize',
     borderRadius: '$borderRadius',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    zIndex: 2
   },
   emptySquare: {
     width: '$boxSize',

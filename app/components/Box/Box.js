@@ -2,22 +2,31 @@ import React, { Component } from 'react';
 import { Text, View, Animated, PanResponder } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addOperand } from '../../actions/interactions';
+import {
+  addOperand,
+  removeOperand,
+  setVacatingZone
+} from '../../actions/interactions';
 import styles from './styles';
 
 class Box extends Component {
-  state = {
-    dragging: false,
-    showDraggable: true,
-    initialTop: styles.$initialTop,
-    initialLeft: styles.$initialLeft,
-    offsetTop: 0,
-    offsetLeft: 0
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      dragging: false,
+      showDraggable: true,
+      offsetTop: 0,
+      offsetLeft: 0
+    };
+    this.initialTop = props.coords ? props.coords.y : styles.$initialTop;
+    this.initialLeft = props.coords ? props.coords.x : styles.$initialLeft;
+  }
 
   static propTypes = {
     dropZones: PropTypes.array.isRequired,
-    value: PropTypes.number.isRequired
+    value: PropTypes.number.isRequired,
+    coords: PropTypes.object,
+    vacatingZoneId: PropTypes.string
   };
 
   panResponder = {};
@@ -36,7 +45,6 @@ class Box extends Component {
     const { dropZones } = this.props;
     const zone = dropZones.find(
       z =>
-        z.isEmpty &&
         gesture.moveY > z.layout.y - styles.$boxBuffer &&
         gesture.moveY < z.layout.y + styles.$boxBuffer + z.layout.height &&
         gesture.moveX > z.layout.x - styles.$boxBuffer &&
@@ -47,65 +55,64 @@ class Box extends Component {
 
   handleStartShouldSetPanResponder = () => true;
 
-  handlePanResponderGrant = () => {
+  handlePanResponderGrant = (evt, gesture) => {
     this.setState({ dragging: true });
   };
 
   handlePanResponderMove = (e, gestureState) => {
+    const zone = this.getDropZone(gestureState);
+    zone && this.props.dispatch(setVacatingZone(zone.zoneId));
     this.setState({
+      showDraggable: true,
+      dragging: true,
+      initialTop: this.initialTop,
+      initialLeft: this.initialLeft,
       offsetTop: gestureState.dy,
       offsetLeft: gestureState.dx
     });
   };
 
   handlePanResponderRelease = (e, gesture) => {
-    const { initialTop, initialLeft } = this.state;
     const zone = this.getDropZone(gesture);
+    const { vacatingZoneId, dispatch } = this.props;
     if (zone) {
-      // this.setState({
-      //   showDraggable: false
-      // });
       this.setState({
         dragging: false,
-        initialTop: zone.layout.y + 20,
-        initialLeft: zone.layout.x,
-        offsetTop: 0,
-        offsetLeft: 0
+        showDraggable: false,
+        initialTop: 0,
+        initialLeft: 0,
+        offsetTop: zone.layout.y + 20,
+        offsetLeft: zone.layout.x
       });
-      this.props.dispatch(addOperand(zone.zoneId, this.props.value));
+      zone.isEmpty && dispatch(addOperand(zone.zoneId, this.props.value));
     } else {
       this.setState({
         dragging: false,
-        initialTop: initialTop,
-        initialLeft: initialLeft,
+        initialTop: this.initialTop,
+        initialLeft: this.initialLeft,
         offsetTop: 0,
         offsetLeft: 0
       });
+      vacatingZoneId && dispatch(removeOperand(vacatingZoneId));
     }
   };
 
   handlePanResponderEnd = () => true;
 
   render() {
-    const {
-      dragging,
-      showDraggable,
-      initialTop,
-      initialLeft,
-      offsetTop,
-      offsetLeft
-    } = this.state;
+    const { dragging, showDraggable, offsetTop, offsetLeft } = this.state;
 
     const style = {
       backgroundColor: dragging
         ? styles.$draggingBackground
         : styles.$backgroundColor,
-      top: initialTop + offsetTop,
-      left: initialLeft + offsetLeft
+      top: showDraggable ? this.initialTop + offsetTop : -100 + offsetTop / 2,
+      left: showDraggable ? this.initialLeft + offsetLeft : offsetLeft
     };
 
-    return showDraggable
-      ? <Animated.View
+    return (
+      <View>
+        <Animated.View
           {...this.panResponder.panHandlers}
           style={[styles.square, style]}
         >
@@ -113,12 +120,15 @@ class Box extends Component {
             {this.props.value}
           </Text>
         </Animated.View>
-      : <View style={styles.emptySquare} />;
+        {!showDraggable && <View style={styles.emptySquare} />}
+      </View>
+    );
   }
 }
 
 const select = state => ({
-  dropZones: state.interactions.dropZones
+  dropZones: state.interactions.dropZones,
+  vacatingZoneId: state.interactions.vacatingZoneId
 });
 
 export default connect(select)(Box);

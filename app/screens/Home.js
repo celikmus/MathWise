@@ -51,10 +51,8 @@ class Home extends Component {
               <Text style={styles.resultText}>245</Text>
             </View>
           </View>
-          <View>
-            <Box value={20} />
-            <Box value={15} />
-          </View>
+          <Box value={20} coords={{ y: 200, x: 0 }} />
+          <Box value={15} coords={{ y: 300, x: 200 }} />
         </View>
         <Operators />
       </Container>

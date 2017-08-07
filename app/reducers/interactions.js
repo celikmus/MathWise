@@ -1,8 +1,14 @@
-import { ADD_DROP_ZONE, ADD_OPERAND } from '../actions/interactions';
+import {
+  ADD_DROP_ZONE,
+  ADD_OPERAND,
+  REMOVE_OPERAND,
+  SET_VACATING_ZONE
+} from '../actions/interactions';
 
 const initialState = {
   selectedOperator: 'sum',
-  dropZones: []
+  dropZones: [],
+  vacatingZoneId: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +33,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         dropZones: zones
       };
+    case REMOVE_OPERAND:
+      const rZones = state.dropZones.map(zone => {
+        let newZone = { ...zone };
+        if (zone.zoneId === action.zoneId) {
+          delete newZone.value;
+          newZone.isEmpty = false;
+        }
+        return newZone;
+      });
+      return {
+        ...state,
+        dropZones: rZones
+      };
+    case SET_VACATING_ZONE:
+      return { ...state, vacatingZoneId: action.zoneId };
     default:
       return state;
   }
