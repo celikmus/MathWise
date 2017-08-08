@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { operators } from '../../utils/numbers';
 import styles from './styles';
 
 const getStyle = (operator, selectedOperator) => {
@@ -15,20 +16,20 @@ const Operators = ({ selectedOperator, changeOperator }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => changeOperator('division')}
-        activeOpacity={selectedOperator === 'division' ? 1 : 0.7}
-        style={getStyle('division', selectedOperator)}
+        onPress={() => changeOperator(operators.division)}
+        activeOpacity={selectedOperator === operators.division ? 1 : 0.7}
+        style={getStyle(operators.division, selectedOperator)}
       >
         <MaterialCommunityIcons
-          name={'division'}
+          name={operators.division}
           color={styles.$iconColor}
           size={styles.$iconSize}
         />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => changeOperator('multiply')}
-        activeOpacity={selectedOperator === 'multiply' ? 1 : 0.7}
-        style={getStyle('multiply', selectedOperator)}
+        onPress={() => changeOperator(operators.multiply)}
+        activeOpacity={selectedOperator === operators.multiply ? 1 : 0.7}
+        style={getStyle(operators.multiply, selectedOperator)}
       >
         <MaterialCommunityIcons
           name={'close'}
@@ -37,9 +38,9 @@ const Operators = ({ selectedOperator, changeOperator }) => {
         />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => changeOperator('sum')}
-        activeOpacity={selectedOperator === 'sum' ? 1 : 0.7}
-        style={getStyle('sum', selectedOperator)}
+        onPress={() => changeOperator(operators.sum)}
+        activeOpacity={selectedOperator === operators.sum ? 1 : 0.7}
+        style={getStyle(operators.sum, selectedOperator)}
       >
         <MaterialCommunityIcons
           name={'plus'}
@@ -48,9 +49,9 @@ const Operators = ({ selectedOperator, changeOperator }) => {
         />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => changeOperator('subtract')}
-        activeOpacity={selectedOperator === 'subtract' ? 1 : 0.7}
-        style={getStyle('subtract', selectedOperator)}
+        onPress={() => changeOperator(operators.subtract)}
+        activeOpacity={selectedOperator === operators.subtract ? 1 : 0.7}
+        style={getStyle(operators.subtract, selectedOperator)}
       >
         <MaterialCommunityIcons
           name={'minus'}

@@ -9,15 +9,17 @@ import { Header } from '../components/Header';
 import { Operators } from '../components/Operators';
 import { Box } from '../components/Box';
 import { DropBox } from '../components/DropBox';
+import { drawNumbers } from '../actions/numbers';
+import { operators } from '../utils/numbers';
 import styles from './styles';
 
 const getIconName = operator => {
   switch (operator) {
-    case 'multiply':
+    case operators.multiply:
       return 'close';
-    case 'sum':
+    case operators.sum:
       return 'plus';
-    case 'subtract':
+    case operators.subtract:
       return 'minus';
     default:
       return operator;
@@ -29,6 +31,9 @@ class Home extends Component {
     selectedOperator: PropTypes.string.isRequired
   };
 
+  componentillMount() {
+    this.props.dispatch(drawNumbers(this.props.selectedOperator));
+  }
   render() {
     return (
       <Container backgroundColor={this.props.backgroundColor}>
@@ -51,7 +56,7 @@ class Home extends Component {
             </DropBox>
             <View style={styles.operator}>
               <MaterialCommunityIcons
-                name={getIconName('equal')}
+                name={getIconName(operators.equal)}
                 color={styles.$iconColor}
                 size={styles.$iconSize}
               />
