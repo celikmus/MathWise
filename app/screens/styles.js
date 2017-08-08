@@ -8,9 +8,7 @@ const styles = EStyleSheet.create({
     height: '100% - 54',
     position: 'absolute',
     bottom: 54,
-    borderWidth: 1,
     top: 20,
-    borderColor: 'black',
     flex: 1
   },
   dropContainer: {
