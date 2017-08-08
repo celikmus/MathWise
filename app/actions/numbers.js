@@ -1,4 +1,4 @@
-import { getRandomInteger, operators } from '../utils/numbers';
+import { getRandomInteger, operators, shuffle } from '../utils/numbers';
 
 export const STORE_DRAWN_NUMBERS = 'STORE_DRAWN_NUMBERS';
 
@@ -17,9 +17,16 @@ const drawMultiplyNumbers = level => {
 };
 
 const drawSumNumbers = level => {
+  const set = new Set();
+  while (set.size < 5) {
+    set.add(getRandomInteger(1, 100));
+  }
+  const values = Array.from(set.values());
+  const result = values[0] + values[1];
+  const options = shuffle(values);
   return {
-    result: 245,
-    options: [10, 15, 56]
+    result,
+    options
   };
 };
 

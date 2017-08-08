@@ -31,7 +31,7 @@ class Home extends Component {
     selectedOperator: PropTypes.string.isRequired
   };
 
-  componentillMount() {
+  componentWillMount() {
     this.props.dispatch(drawNumbers(this.props.selectedOperator));
   }
   render() {
