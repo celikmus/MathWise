@@ -19,7 +19,7 @@ const drawMultiplyNumbers = level => {
 const drawSumNumbers = level => {
   const set = new Set();
   while (set.size < 5) {
-    set.add(getRandomInteger(1, 100));
+    set.add(getRandomInteger(1, 10));
   }
   const values = Array.from(set.values());
   const result = values[0] + values[1];

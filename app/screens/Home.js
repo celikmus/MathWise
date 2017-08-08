@@ -26,13 +26,44 @@ const getIconName = operator => {
   }
 };
 
+const boxCoordinates = [
+  {
+    x: 130,
+    y: 100
+  },
+  {
+    x: 60,
+    y: 200
+  },
+  {
+    x: 200,
+    y: 200
+  },
+  {
+    x: 60,
+    y: 300
+  },
+  {
+    x: 200,
+    y: 300
+  }
+];
+
 class Home extends Component {
   static propTypes = {
-    selectedOperator: PropTypes.string.isRequired
+    selectedOperator: PropTypes.string.isRequired,
+    result: PropTypes.number,
+    options: PropTypes.array
   };
 
   componentWillMount() {
     this.props.dispatch(drawNumbers(this.props.selectedOperator));
+  }
+  renderOptions() {
+    const options = this.props.options.map((option, i) =>
+      <Box key={i} value={option} coords={boxCoordinates[i]} />
+    );
+    return options;
   }
   render() {
     return (
@@ -62,11 +93,12 @@ class Home extends Component {
               />
             </View>
             <View style={styles.result}>
-              <Text style={styles.resultText}>245</Text>
+              <Text style={styles.resultText}>
+                {this.props.result}
+              </Text>
             </View>
           </View>
-          <Box value={20} coords={{ y: 200, x: 0 }} />
-          <Box value={15} coords={{ y: 300, x: 200 }} />
+          {this.renderOptions()}
         </View>
         <Operators
           selectedOperator={this.props.selectedOperator}
@@ -78,7 +110,9 @@ class Home extends Component {
 }
 
 const select = state => ({
-  selectedOperator: state.interactions.selectedOperator
+  selectedOperator: state.interactions.selectedOperator,
+  result: state.numbers.result,
+  options: state.numbers.options
 });
 
 export default connect(select)(Home);
