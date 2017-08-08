@@ -1,5 +1,6 @@
 export const ADD_DROP_ZONE = 'ADD_DROP_ZONE';
 export const ADD_OPERAND = 'ADD_OPERAND';
+export const CHANGE_OPERATOR = 'CHANGE_OPERATOR';
 export const REMOVE_OPERAND = 'REMOVE_OPERAND';
 export const SET_VACATING_ZONE = 'SET_VACATING_ZONE';
 
@@ -23,4 +24,9 @@ export const removeOperand = zoneId => ({
 export const setVacatingZone = zoneId => ({
   type: SET_VACATING_ZONE,
   zoneId
+});
+
+export const changeOperator = selectedOperator => ({
+  type: CHANGE_OPERATOR,
+  selectedOperator
 });

@@ -3,6 +3,7 @@ import { View, Text, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { changeOperator } from '../actions/interactions';
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
 import { Operators } from '../components/Operators';
@@ -24,6 +25,10 @@ const getIconName = operator => {
 };
 
 class Home extends Component {
+  static propTypes = {
+    selectedOperator: PropTypes.string.isRequired
+  };
+
   render() {
     return (
       <Container backgroundColor={this.props.backgroundColor}>
@@ -58,7 +63,10 @@ class Home extends Component {
           <Box value={20} coords={{ y: 200, x: 0 }} />
           <Box value={15} coords={{ y: 300, x: 200 }} />
         </View>
-        <Operators />
+        <Operators
+          selectedOperator={this.props.selectedOperator}
+          changeOperator={o => this.props.dispatch(changeOperator(o))}
+        />
       </Container>
     );
   }

@@ -1,6 +1,7 @@
 import {
   ADD_DROP_ZONE,
   ADD_OPERAND,
+  CHANGE_OPERATOR,
   REMOVE_OPERAND,
   SET_VACATING_ZONE
 } from '../actions/interactions';
@@ -33,6 +34,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         dropZones: zones
       };
+    case CHANGE_OPERATOR:
+      const { selectedOperator } = action;
+      return { ...state, selectedOperator };
     case REMOVE_OPERAND:
       const rZones = state.dropZones.map(zone => {
         let newZone = { ...zone };
