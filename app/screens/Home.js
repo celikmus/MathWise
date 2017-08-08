@@ -28,10 +28,6 @@ const getIconName = operator => {
 
 const boxCoordinates = [
   {
-    x: 130,
-    y: 100
-  },
-  {
     x: 60,
     y: 200
   },
