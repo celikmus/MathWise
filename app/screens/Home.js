@@ -12,7 +12,7 @@ import { DropBox } from '../components/DropBox';
 import { drawNumbers } from '../actions/numbers';
 import { reloadGame } from '../actions/interactions';
 import { operators } from '../utils/numbers';
-import { boxCoordinates } from '../config/screen';
+import { getBoxCoordinates } from '../config/screen';
 import styles from './styles';
 
 const getIconName = operator => {
@@ -40,8 +40,14 @@ class Home extends Component {
     dispatch(drawNumbers(selectedOperator));
   }
   renderOptions() {
+    const boxCoordinates = getBoxCoordinates();
     const options = this.props.options.map((option, i) =>
-      <Box key={i} value={option} coords={boxCoordinates[i]} />
+      <Box
+        key={i}
+        boxId={i + 1}
+        value={option}
+        coords={boxCoordinates[i + 1]}
+      />
     );
     return options;
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Animated, PanResponder } from 'react-native';
+import { Text, View, Animated, PanResponder, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -7,27 +7,35 @@ import {
   removeOperand,
   setVacatingZone
 } from '../../actions/interactions';
+import { getBoxCoordinates } from '../../config/screen';
 import styles from './styles';
 
 class Box extends Component {
   constructor(props) {
     super(props);
-    this.initTop = props.coords ? props.coords.y : styles.$initialTop;
-    this.initLeft = props.coords ? props.coords.x : styles.$initialLeft;
+    const coords = getBoxCoordinates(props.boxId);
     this.state = {
       dragging: false,
-      initialTop: this.initTop,
-      initialLeft: this.initLeft,
+      initialTop: coords.y,
+      initialLeft: coords.x,
       offsetTop: 0,
       offsetLeft: 0
     };
+    Dimensions.addEventListener('change', () => {
+      const coords = getBoxCoordinates(props.boxId);
+      this.setState({
+        initialTop: coords.y,
+        initialLeft: coords.x
+      });
+    });
   }
 
   static propTypes = {
     dropZones: PropTypes.array.isRequired,
     value: PropTypes.number.isRequired,
     coords: PropTypes.object,
-    vacatingZoneId: PropTypes.string
+    vacatingZoneId: PropTypes.string,
+    boxId: PropTypes.number
   };
 
   panResponder = {};
@@ -45,8 +53,8 @@ class Box extends Component {
   componentWillUpdate() {
     if (this.props.resetting) {
       this.setState({
-        initialTop: this.initTop,
-        initialLeft: this.initLeft
+        initialTop: this.initialTop,
+        initialLeft: this.initialLeft
       });
     }
   }
@@ -107,8 +115,8 @@ class Box extends Component {
       // done --> put back to init place
       this.setState({
         dragging: false,
-        initialTop: this.initTop,
-        initialLeft: this.initLeft,
+        initialTop: this.initialTop,
+        initialLeft: this.initialLeft,
         offsetTop: 0,
         offsetLeft: 0
       });

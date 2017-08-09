@@ -4,8 +4,7 @@ import {
   CHANGE_OPERATOR,
   RELOAD_GAME,
   REMOVE_OPERAND,
-  SET_VACATING_ZONE,
-  STORE_BOX_COORDINATES
+  SET_VACATING_ZONE
 } from '../actions/interactions';
 
 import { STORE_DRAWN_NUMBERS } from '../actions/numbers';

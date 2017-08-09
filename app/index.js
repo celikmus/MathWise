@@ -3,7 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Provider } from 'react-redux';
 import Navigator from './config/routes';
 import store from './config/store';
-import { viewPortHeight, viewPortWidth, boxCoordinates } from './config/screen';
+import { viewPortHeight, viewPortWidth } from './config/screen';
 
 EStyleSheet.build({
   $primaryOrange: '#f08500',
