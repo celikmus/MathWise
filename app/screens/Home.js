@@ -12,7 +12,6 @@ import { DropBox } from '../components/DropBox';
 import { drawNumbers } from '../actions/numbers';
 import { reloadGame } from '../actions/interactions';
 import { operators } from '../utils/numbers';
-import { getBoxCoordinates } from '../config/screen';
 import styles from './styles';
 
 const getIconName = operator => {
@@ -40,14 +39,8 @@ class Home extends Component {
     dispatch(drawNumbers(selectedOperator));
   }
   renderOptions() {
-    const boxCoordinates = getBoxCoordinates();
     const options = this.props.options.map((option, i) =>
-      <Box
-        key={i}
-        boxId={i + 1}
-        value={option}
-        coords={boxCoordinates[i + 1]}
-      />
+      <Box key={i} boxId={i + 1} value={option} />
     );
     return options;
   }
@@ -56,7 +49,7 @@ class Home extends Component {
     setTimeout(() => {
       dispatch(reloadGame());
       dispatch(drawNumbers(selectedOperator));
-    }, 2000);
+    }, 1000);
     return <Text>Success!</Text>;
   }
   renderFail() {

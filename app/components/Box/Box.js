@@ -13,19 +13,19 @@ import styles from './styles';
 class Box extends Component {
   constructor(props) {
     super(props);
-    const coords = getBoxCoordinates(props.boxId);
+    this.coords = getBoxCoordinates(props.boxId);
     this.state = {
       dragging: false,
-      initialTop: coords.y,
-      initialLeft: coords.x,
+      initialTop: this.coords.y,
+      initialLeft: this.coords.x,
       offsetTop: 0,
       offsetLeft: 0
     };
     Dimensions.addEventListener('change', () => {
-      const coords = getBoxCoordinates(props.boxId);
+      this.coords = getBoxCoordinates(props.boxId);
       this.setState({
-        initialTop: coords.y,
-        initialLeft: coords.x
+        initialTop: this.coords.y,
+        initialLeft: this.coords.x
       });
     });
   }
@@ -33,7 +33,6 @@ class Box extends Component {
   static propTypes = {
     dropZones: PropTypes.array.isRequired,
     value: PropTypes.number.isRequired,
-    coords: PropTypes.object,
     vacatingZoneId: PropTypes.string,
     boxId: PropTypes.number
   };
@@ -53,8 +52,8 @@ class Box extends Component {
   componentWillUpdate() {
     if (this.props.resetting) {
       this.setState({
-        initialTop: this.initialTop,
-        initialLeft: this.initialLeft
+        initialTop: this.coords.y,
+        initialLeft: this.coords.x
       });
     }
   }
@@ -115,8 +114,8 @@ class Box extends Component {
       // done --> put back to init place
       this.setState({
         dragging: false,
-        initialTop: this.initialTop,
-        initialLeft: this.initialLeft,
+        initialTop: this.coords.y,
+        initialLeft: this.coords.x,
         offsetTop: 0,
         offsetLeft: 0
       });
