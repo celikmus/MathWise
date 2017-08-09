@@ -10,7 +10,10 @@ import { Operators } from '../components/Operators';
 import { Box } from '../components/Box';
 import { DropBox } from '../components/DropBox';
 import { drawNumbers } from '../actions/numbers';
+import { reloadGame } from '../actions/interactions';
 import { operators } from '../utils/numbers';
+import boxCoordinates from './boxCoordinates';
+
 import styles from './styles';
 
 const getIconName = operator => {
@@ -26,25 +29,6 @@ const getIconName = operator => {
   }
 };
 
-const boxCoordinates = [
-  {
-    x: 60,
-    y: 200
-  },
-  {
-    x: 200,
-    y: 200
-  },
-  {
-    x: 60,
-    y: 300
-  },
-  {
-    x: 200,
-    y: 300
-  }
-];
-
 class Home extends Component {
   static propTypes = {
     selectedOperator: PropTypes.string.isRequired,
@@ -53,7 +37,8 @@ class Home extends Component {
   };
 
   componentWillMount() {
-    this.props.dispatch(drawNumbers(this.props.selectedOperator));
+    const { dispatch, selectedOperator } = this.props;
+    dispatch(drawNumbers(selectedOperator));
   }
   renderOptions() {
     const options = this.props.options.map((option, i) =>
@@ -62,6 +47,11 @@ class Home extends Component {
     return options;
   }
   renderSuccess() {
+    const { selectedOperator, dispatch } = this.props;
+    setTimeout(() => {
+      dispatch(reloadGame());
+      dispatch(drawNumbers(selectedOperator));
+    }, 2000);
     return <Text>Success!</Text>;
   }
   renderFail() {

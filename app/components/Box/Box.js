@@ -42,6 +42,15 @@ class Box extends Component {
     });
   }
 
+  componentWillUpdate() {
+    if (this.props.resetting) {
+      this.setState({
+        initialTop: this.initTop,
+        initialLeft: this.initLeft
+      });
+    }
+  }
+
   getDropZone(gesture) {
     const { dropZones } = this.props;
     const zone = dropZones.find(
@@ -143,6 +152,7 @@ class Box extends Component {
 }
 
 const select = state => ({
+  resetting: state.interactions.resetting,
   dropZones: state.interactions.dropZones,
   vacatingZoneId: state.interactions.vacatingZoneId
 });
