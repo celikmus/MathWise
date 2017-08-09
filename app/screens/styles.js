@@ -34,6 +34,13 @@ const styles = EStyleSheet.create({
   resultText: {
     fontWeight: '700',
     fontSize: 28
+  },
+  message: {
+    position: 'absolute',
+    top: '$dropContainerHeight',
+    width: '100%',
+    padding: 10,
+    alignItems: 'center'
   }
 });
 

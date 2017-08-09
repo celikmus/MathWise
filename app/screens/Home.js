@@ -61,6 +61,12 @@ class Home extends Component {
     );
     return options;
   }
+  renderSuccess() {
+    return <Text>Success!</Text>;
+  }
+  renderFail() {
+    return <Text>Incorrect!</Text>;
+  }
   render() {
     return (
       <Container backgroundColor={this.props.backgroundColor}>
@@ -94,6 +100,12 @@ class Home extends Component {
               </Text>
             </View>
           </View>
+          {this.props.isFilled &&
+            <View style={styles.message}>
+              {this.props.result === this.props.total
+                ? this.renderSuccess()
+                : this.renderFail()}
+            </View>}
           {this.renderOptions()}
         </View>
         <Operators
@@ -110,10 +122,14 @@ const select = state => {
     (sum, zone) => sum + (zone.value || 0),
     0
   );
+  const zoneCount = state.interactions.dropZones.length;
+  const dropCount = state.interactions.dropCount;
+  const isFilled = zoneCount === dropCount;
   return {
     selectedOperator: state.interactions.selectedOperator,
     result: state.numbers.result,
     options: state.numbers.options,
+    isFilled,
     total
   };
 };
