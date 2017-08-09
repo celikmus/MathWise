@@ -12,8 +12,7 @@ import { DropBox } from '../components/DropBox';
 import { drawNumbers } from '../actions/numbers';
 import { reloadGame } from '../actions/interactions';
 import { operators } from '../utils/numbers';
-import boxCoordinates from './boxCoordinates';
-
+import { boxCoordinates } from '../config/screen';
 import styles from './styles';
 
 const getIconName = operator => {

@@ -3,6 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Provider } from 'react-redux';
 import Navigator from './config/routes';
 import store from './config/store';
+import { viewPortHeight, viewPortWidth, boxCoordinates } from './config/screen';
 
 EStyleSheet.build({
   $primaryOrange: '#f08500',
@@ -13,9 +14,9 @@ EStyleSheet.build({
   $secondaryGreen: '#9ce5e0',
   $primaryBlack: '#000',
   $primaryGray: '#aaa',
-  $dropContainerHeight: 100,
-  $dropZoneBuffer: 30,
-  $boxSize: 64,
+  $dropContainerHeight: Math.max(viewPortHeight, viewPortWidth) / 5,
+  $dropZoneBuffer: viewPortWidth / 10,
+  $boxSize: Math.min(viewPortHeight, viewPortWidth) / 5,
   $borderRadius: 4
   // outline: 1
 });
