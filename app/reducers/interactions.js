@@ -19,11 +19,19 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_DROP_ZONE:
-      const { dropZones } = state;
       const { zoneId, layout } = action;
+      let aZones = [...state.dropZones, { zoneId, layout, isEmpty: true }];
+      if (state.dropZones.some(z => z.zoneId === action.zoneId)) {
+        aZones = state.dropZones.map(z => {
+          if (z.zoneId === action.zoneId) {
+            return { ...z, layout: action.layout };
+          }
+          return { ...z };
+        });
+      }
       return {
         ...state,
-        dropZones: [...dropZones, { zoneId, layout, isEmpty: true }]
+        dropZones: aZones
       };
     case ADD_OPERAND:
       const zones = state.dropZones.map(zone => {
