@@ -105,10 +105,17 @@ class Home extends Component {
   }
 }
 
-const select = state => ({
-  selectedOperator: state.interactions.selectedOperator,
-  result: state.numbers.result,
-  options: state.numbers.options
-});
+const select = state => {
+  const total = state.interactions.dropZones.reduce(
+    (sum, zone) => sum + (zone.value || 0),
+    0
+  );
+  return {
+    selectedOperator: state.interactions.selectedOperator,
+    result: state.numbers.result,
+    options: state.numbers.options,
+    total
+  };
+};
 
 export default connect(select)(Home);

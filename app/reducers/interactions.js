@@ -9,7 +9,8 @@ import {
 const initialState = {
   selectedOperator: 'sum',
   dropZones: [],
-  vacatingZoneId: ''
+  vacatingZoneId: '',
+  dropCount: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,11 +33,12 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        dropZones: zones
+        dropZones: zones,
+        dropCount: state.dropCount + 1
       };
     case CHANGE_OPERATOR:
       const { selectedOperator } = action;
-      return { ...state, selectedOperator };
+      return { ...state, selectedOperator, dropCount: 0 };
     case REMOVE_OPERAND:
       const rZones = state.dropZones.map(zone => {
         let newZone = { ...zone };
@@ -49,10 +51,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         vacatingZoneId: '',
-        dropZones: rZones
+        dropZones: rZones,
+        dropCount: state.dropCount - 1
       };
     case SET_VACATING_ZONE:
-      return { ...state, vacatingZoneId: action.zoneId };
+      return {
+        ...state,
+        vacatingZoneId: action.zoneId
+      };
     default:
       return state;
   }
