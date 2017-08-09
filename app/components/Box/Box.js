@@ -84,8 +84,8 @@ class Box extends Component {
       !vacatingZoneId && dispatch(setVacatingZone(zone.zoneId));
       this.setState({
         dragging: true,
-        offsetTop: gestureState.moveY,
-        offsetLeft: gestureState.moveX
+        offsetTop: gestureState.dy,
+        offsetLeft: gestureState.dx
       });
     } else {
       // done --> drag to anywhere
