@@ -16,7 +16,7 @@ const Operators = ({ selectedOperator, changeOperator }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => changeOperator(operators.division)}
+        // onPress={() => changeOperator(operators.division)}
         activeOpacity={selectedOperator === operators.division ? 1 : 0.7}
         style={getStyle(operators.division, selectedOperator)}
       >
@@ -27,7 +27,7 @@ const Operators = ({ selectedOperator, changeOperator }) => {
         />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => changeOperator(operators.multiply)}
+        // onPress={() => changeOperator(operators.multiply)}
         activeOpacity={selectedOperator === operators.multiply ? 1 : 0.7}
         style={getStyle(operators.multiply, selectedOperator)}
       >
