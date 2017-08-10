@@ -22,8 +22,10 @@ export const changeOperator = selectedOperator => ({
   selectedOperator
 });
 
-export const reloadGame = () => ({
-  type: RELOAD_GAME
+export const reloadGame = (resetting, selectedOperator) => ({
+  type: RELOAD_GAME,
+  resetting,
+  selectedOperator
 });
 
 export const removeOperand = zoneId => ({

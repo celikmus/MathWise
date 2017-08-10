@@ -31,9 +31,16 @@ const drawSumNumbers = level => {
 };
 
 const drawTakeawayNumbers = level => {
+  const set = new Set();
+  while (set.size < 4) {
+    set.add(getRandomInteger(1, 10));
+  }
+  const values = Array.from(set.values());
+  const result = Math.abs(values[0] - values[1]);
+  const options = shuffle(values);
   return {
-    result: 245,
-    options: [10, 15, 56]
+    result,
+    options
   };
 };
 

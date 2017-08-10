@@ -54,7 +54,12 @@ const reducer = (state = initialState, action) => {
       const dZones = state.dropZones.map(zone => {
         return { ...zone, isEmpty: true, value: null };
       });
-      return { ...initialState, resetting: true, dropZones: dZones };
+      return {
+        ...initialState,
+        selectedOperator: action.selectedOperator,
+        resetting: !!action.resetting,
+        dropZones: dZones
+      };
     case REMOVE_OPERAND:
       const rZones = state.dropZones.map(zone => {
         let newZone = { ...zone };
