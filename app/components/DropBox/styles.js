@@ -13,13 +13,6 @@ const styles = EStyleSheet.create({
   text: {
     color: 'white',
     fontSize: 12
-  },
-  filled: {
-    backgroundColor: '$secondaryBrown'
-  },
-  filledText: {
-    fontWeight: '700',
-    fontSize: 28
   }
 });
 

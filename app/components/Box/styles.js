@@ -27,7 +27,8 @@ const styles = EStyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 12
+    fontSize: 14,
+    fontWeight: '700'
   }
 });
 
