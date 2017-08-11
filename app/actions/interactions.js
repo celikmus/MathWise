@@ -29,7 +29,7 @@ export const endRestart = () => ({
 });
 
 export const restartGame = selectedOperator => {
-  const { result, options } = drawNumbers();
+  const { result, options } = drawNumbers(selectedOperator);
   return {
     type: RESTART_GAME,
     selectedOperator,
