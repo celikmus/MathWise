@@ -39,7 +39,8 @@ class Home extends Component {
   }
 
   static propTypes = {
-    selectedOperator: PropTypes.string.isRequired,
+    selectedOperator: PropTypes.string,
+    total: PropTypes.number,
     result: PropTypes.number,
     options: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
@@ -142,11 +143,11 @@ const select = state => {
   const { result, options } = state.numbers;
   const zoneCount = dropZones.length;
   const isFilled = zoneCount === dropCount;
-  const total = isFilled && calculateTotal(dropZones, selectedOperator);
+  const total = isFilled ? calculateTotal(dropZones, selectedOperator) : 0;
   return {
     result,
     options,
-    selectedOperator,
+    selectedOperator: selectedOperator || 'sum',
     isFilled,
     total,
     restarting

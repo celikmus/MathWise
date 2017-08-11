@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Animated, PanResponder, Dimensions } from 'react-native';
+import { Text, View, Animated, PanResponder } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -7,7 +7,6 @@ import {
   removeOperand,
   setVacatingZone
 } from '../../actions/interactions';
-import { getBoxCoordinates } from '../../config/screen';
 import styles from './styles';
 
 class Box extends Component {
@@ -74,7 +73,6 @@ class Box extends Component {
     const zone = this.getDropZone(gestureState);
     const { vacatingZoneId, dispatch } = this.props;
     if (zone && !zone.isEmpty) {
-      // TODO: Box disappearing when hovered over a filled zone...
       !vacatingZoneId && dispatch(setVacatingZone(zone.zoneId));
       this.setState({
         dragging: true,

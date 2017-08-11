@@ -10,11 +10,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case RESTART_GAME:
-      return {
-        ...state,
-        result: action.result,
-        options: action.options
-      };
     case STORE_DRAWN_NUMBERS:
       return { ...state, result: action.result, options: action.options };
     default:

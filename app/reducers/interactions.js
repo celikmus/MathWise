@@ -88,8 +88,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         vacatingZoneId: action.zoneId
       };
-    case STORE_DRAWN_NUMBERS:
-      return { ...state, resetting: false };
     default:
       return state;
   }
