@@ -13,28 +13,21 @@ import styles from './styles';
 class Box extends Component {
   constructor(props) {
     super(props);
-    this.coords = getBoxCoordinates(props.boxId);
     this.state = {
       dragging: false,
-      initialTop: this.coords.y,
-      initialLeft: this.coords.x,
+      initialTop: props.initCoords[props.boxId].y,
+      initialLeft: props.initCoords[props.boxId].x,
       offsetTop: 0,
       offsetLeft: 0
     };
-    Dimensions.addEventListener('change', () => {
-      this.coords = getBoxCoordinates(props.boxId);
-      this.setState({
-        initialTop: this.coords.y,
-        initialLeft: this.coords.x
-      });
-    });
   }
 
   static propTypes = {
     dropZones: PropTypes.array.isRequired,
     value: PropTypes.number.isRequired,
     vacatingZoneId: PropTypes.string,
-    boxId: PropTypes.number
+    boxId: PropTypes.number,
+    initCoords: PropTypes.array
   };
 
   panResponder = {};
@@ -50,10 +43,11 @@ class Box extends Component {
   }
 
   componentWillUpdate() {
-    if (this.props.resetting) {
+    if (this.props.restarting) {
+      const { initCoords, boxId } = this.props;
       this.setState({
-        initialTop: this.coords.y,
-        initialLeft: this.coords.x
+        initialTop: initCoords[boxId].y,
+        initialLeft: initCoords[boxId].x
       });
     }
   }
@@ -114,8 +108,8 @@ class Box extends Component {
       // done --> put back to init place
       this.setState({
         dragging: false,
-        initialTop: this.coords.y,
-        initialLeft: this.coords.x,
+        initialTop: this.props.initCoords[this.props.boxId].y,
+        initialLeft: this.props.initCoords[this.props.boxId].x,
         offsetTop: 0,
         offsetLeft: 0
       });
@@ -159,7 +153,8 @@ class Box extends Component {
 }
 
 const select = state => ({
-  resetting: state.interactions.resetting,
+  initCoords: state.interactions.initCoords,
+  restarting: state.interactions.restarting,
   dropZones: state.interactions.dropZones,
   vacatingZoneId: state.interactions.vacatingZoneId
 });

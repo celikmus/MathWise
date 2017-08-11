@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, Text, StatusBar, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -8,8 +8,11 @@ import { Header } from '../components/Header';
 import { Operators } from '../components/Operators';
 import { Box } from '../components/Box';
 import { DropBox } from '../components/DropBox';
-import { drawNumbers } from '../actions/numbers';
-import { reloadGame, changeOperator } from '../actions/interactions';
+import {
+  restartGame,
+  endRestart,
+  changeOperator
+} from '../actions/interactions';
 import { operators } from '../utils/numbers';
 import styles from './styles';
 
@@ -30,36 +33,38 @@ class Home extends Component {
   constructor() {
     super();
     this.handleChangeOperator = this.handleChangeOperator.bind(this);
+    Dimensions.addEventListener('change', () => {
+      this.props.dispatch(restartGame());
+    });
   }
 
   static propTypes = {
     selectedOperator: PropTypes.string.isRequired,
     result: PropTypes.number,
-    options: PropTypes.array
+    options: PropTypes.array,
+    dispatch: PropTypes.func.isRequired,
+    restarting: PropTypes.bool.isRequired
   };
 
   handleChangeOperator(selectedOperator) {
     const { dispatch } = this.props;
-    dispatch(reloadGame(true, selectedOperator));
-    dispatch(changeOperator(selectedOperator));
-    dispatch(drawNumbers(selectedOperator));
+    dispatch(restartGame(selectedOperator));
   }
 
-  componentWillMount() {
-    const { dispatch, selectedOperator } = this.props;
-    dispatch(drawNumbers(selectedOperator));
+  componentDidUpdate() {
+    const { dispatch, restarting } = this.props;
+    restarting && dispatch(endRestart());
   }
   renderOptions() {
     const options = this.props.options.map((option, i) =>
-      <Box key={i} boxId={i + 1} value={option} />
+      <Box key={i} boxId={i} value={option} />
     );
     return options;
   }
   renderSuccess() {
     const { selectedOperator, dispatch } = this.props;
     setTimeout(() => {
-      dispatch(reloadGame(true, selectedOperator));
-      dispatch(drawNumbers(selectedOperator));
+      dispatch(restartGame(selectedOperator));
     }, 1000);
     return <Text>Success!</Text>;
   }
@@ -128,18 +133,23 @@ const calculateTotal = (dropZones, operator) => {
 };
 
 const select = state => {
-  const selectedOperator = state.interactions.selectedOperator;
-  const zoneCount = state.interactions.dropZones.length;
-  const dropCount = state.interactions.dropCount;
+  const {
+    selectedOperator,
+    dropZones,
+    dropCount,
+    restarting
+  } = state.interactions;
+  const { result, options } = state.numbers;
+  const zoneCount = dropZones.length;
   const isFilled = zoneCount === dropCount;
-  const total =
-    isFilled && calculateTotal(state.interactions.dropZones, selectedOperator);
+  const total = isFilled && calculateTotal(dropZones, selectedOperator);
   return {
-    result: state.numbers.result,
-    options: state.numbers.options,
+    result,
+    options,
     selectedOperator,
     isFilled,
-    total
+    total,
+    restarting
   };
 };
 

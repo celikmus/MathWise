@@ -44,8 +44,8 @@ const drawTakeawayNumbers = level => {
   };
 };
 
-export const drawNumbers = (selectedOperator, level = 0) => {
-  let giveNumber = () => {};
+export const drawNumbers = (selectedOperator = 'sum', level = 0) => {
+  let giveNumbers = () => {};
   switch (selectedOperator) {
     case operators.division:
       giveNumbers = () => drawDivisionNumbers(level);
@@ -60,9 +60,10 @@ export const drawNumbers = (selectedOperator, level = 0) => {
       giveNumbers = () => drawTakeawayNumbers(level);
       break;
   }
-  return {
-    type: STORE_DRAWN_NUMBERS,
-    selectedOperator,
-    ...giveNumbers()
-  };
+  return giveNumbers();
 };
+
+export const storeDrawnNumbers = drawnNumbers => ({
+  type: STORE_DRAWN_NUMBERS,
+  ...drawnNumbers()
+});

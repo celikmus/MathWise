@@ -2,18 +2,22 @@ import {
   ADD_DROP_ZONE,
   ADD_OPERAND,
   CHANGE_OPERATOR,
-  RELOAD_GAME,
+  END_RESTART,
+  RESTART_GAME,
   REMOVE_OPERAND,
   SET_VACATING_ZONE
 } from '../actions/interactions';
 
 import { STORE_DRAWN_NUMBERS } from '../actions/numbers';
+import { getBoxCoordinates } from '../config/screen';
 
 const initialState = {
   selectedOperator: 'sum',
+  initCoords: getBoxCoordinates(),
   dropZones: [],
   vacatingZoneId: '',
-  dropCount: 0
+  dropCount: 0,
+  restarting: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,15 +54,19 @@ const reducer = (state = initialState, action) => {
     case CHANGE_OPERATOR:
       const { selectedOperator } = action;
       return { ...state, selectedOperator, dropCount: 0 };
-    case RELOAD_GAME:
+    case END_RESTART:
+      return { ...state, restarting: false };
+    case RESTART_GAME:
+      const initCoords = getBoxCoordinates();
       const dZones = state.dropZones.map(zone => {
         return { ...zone, isEmpty: true, value: null };
       });
       return {
         ...initialState,
         selectedOperator: action.selectedOperator,
-        resetting: !!action.resetting,
-        dropZones: dZones
+        restarting: true,
+        dropZones: dZones,
+        initCoords
       };
     case REMOVE_OPERAND:
       const rZones = state.dropZones.map(zone => {
