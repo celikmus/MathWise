@@ -130,6 +130,8 @@ const calculateTotal = (dropZones, operator) => {
       const subValue1 = dropZones.filter(z => z.zoneId === 0)[0].value;
       const subValue2 = dropZones.filter(z => z.zoneId === 1)[0].value;
       return subValue1 - subValue2;
+    case operators.multiply:
+      return dropZones.reduce((sum, zone) => sum * (zone.value || 0), 1);
     default:
       return 0;
   }
