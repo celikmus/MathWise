@@ -1,17 +1,18 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import color from 'color';
 
 const styles = EStyleSheet.create({
   square: {
     width: '$boxSize',
     height: '$boxSize',
-    borderColor: '$secondaryBrown',
-    borderWidth: 1,
     borderRadius: '$borderRadius',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: () =>
+      color(EStyleSheet.value('$dropContainerBackground')).darken(0.2)
   },
   text: {
-    color: 'white',
+    color: '$primaryGray',
     fontSize: 12
   }
 });

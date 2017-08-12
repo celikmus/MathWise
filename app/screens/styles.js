@@ -1,7 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
-  $iconColor: '$primaryBlack',
+  $iconColor: 'white',
   $iconSize: 28,
   container: {
     width: '100%',
@@ -13,7 +13,7 @@ const styles = EStyleSheet.create({
   },
   dropContainer: {
     height: '$dropContainerHeight',
-    backgroundColor: 'red',
+    backgroundColor: '$dropContainerBackground',
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center',
@@ -34,7 +34,8 @@ const styles = EStyleSheet.create({
   },
   resultText: {
     fontWeight: '700',
-    fontSize: 28
+    fontSize: 28,
+    color: 'white'
   },
   message: {
     position: 'absolute',
