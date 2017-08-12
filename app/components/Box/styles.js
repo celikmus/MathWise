@@ -1,8 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const boxSize = 64;
-const boxBufer = 30;
-
 const styles = EStyleSheet.create({
   $backgroundColor: '$primaryBrown',
   $draggingBackground: '$secondaryBrown',
@@ -27,7 +24,7 @@ const styles = EStyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 14,
+    fontSize: '$boxSize/4',
     fontWeight: '700'
   }
 });

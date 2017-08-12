@@ -127,7 +127,9 @@ const calculateTotal = (dropZones, operator) => {
     case operators.sum:
       return dropZones.reduce((sum, zone) => sum + (zone.value || 0), 0);
     case operators.subtract:
-      return dropZones[0].value - dropZones[1].value;
+      const subValue1 = dropZones.filter(z => z.zoneId === 0)[0].value;
+      const subValue2 = dropZones.filter(z => z.zoneId === 1)[0].value;
+      return subValue1 - subValue2;
     default:
       return 0;
   }
