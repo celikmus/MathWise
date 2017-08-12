@@ -24,7 +24,6 @@ class Box extends Component {
   static propTypes = {
     dropZones: PropTypes.array.isRequired,
     value: PropTypes.number.isRequired,
-    vacatingZoneId: PropTypes.string,
     boxId: PropTypes.number,
     initCoords: PropTypes.array
   };
@@ -71,9 +70,9 @@ class Box extends Component {
 
   handlePanResponderMove = (e, gestureState) => {
     const zone = this.getDropZone(gestureState);
-    const { vacatingZoneId, dispatch } = this.props;
+    const { dispatch } = this.props;
     if (zone && !zone.isEmpty) {
-      !vacatingZoneId && dispatch(setVacatingZone(zone.zoneId));
+      dispatch(removeOperand(zone.zoneId));
       this.setState({
         dragging: true,
         offsetTop: gestureState.dy,
@@ -92,7 +91,7 @@ class Box extends Component {
   handlePanResponderRelease = (e, gesture) => {
     const zone = this.getDropZone(gesture);
     const hasMoved = gesture.dx || gesture.dy;
-    const { vacatingZoneId, dispatch } = this.props;
+    const { dispatch } = this.props;
     if (zone && hasMoved && zone.isEmpty) {
       this.setState(() => ({
         dragging: false,
@@ -111,7 +110,7 @@ class Box extends Component {
         offsetTop: 0,
         offsetLeft: 0
       });
-      vacatingZoneId && dispatch(removeOperand(vacatingZoneId));
+      zone && dispatch(removeOperand(zone.zoneId));
     }
   };
 
@@ -153,8 +152,7 @@ class Box extends Component {
 const select = state => ({
   initCoords: state.interactions.initCoords,
   restarting: state.interactions.restarting,
-  dropZones: state.interactions.dropZones,
-  vacatingZoneId: state.interactions.vacatingZoneId
+  dropZones: state.interactions.dropZones
 });
 
 export default connect(select)(Box);

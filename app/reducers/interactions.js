@@ -4,8 +4,7 @@ import {
   CHANGE_OPERATOR,
   END_RESTART,
   RESTART_GAME,
-  REMOVE_OPERAND,
-  SET_VACATING_ZONE
+  REMOVE_OPERAND
 } from '../actions/interactions';
 
 import { STORE_DRAWN_NUMBERS } from '../actions/numbers';
@@ -15,7 +14,6 @@ const initialState = {
   selectedOperator: 'sum',
   initCoords: getBoxCoordinates(),
   dropZones: [],
-  vacatingZoneId: '',
   dropCount: 0,
   restarting: false
 };
@@ -79,14 +77,8 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        vacatingZoneId: '',
         dropZones: rZones,
         dropCount: state.dropCount - 1
-      };
-    case SET_VACATING_ZONE:
-      return {
-        ...state,
-        vacatingZoneId: action.zoneId
       };
     default:
       return state;

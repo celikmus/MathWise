@@ -9,16 +9,16 @@ class DropBox extends Component {
   constructor() {
     super();
     this.setDropZoneValues = this.setDropZoneValues.bind(this);
-    this.zoneId = `DropZone-${Math.random().toString(16).substring(7)}`;
   }
 
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    zoneId: PropTypes.number.isRequired
   };
 
   setDropZoneValues = event => {
-    const { dispatch } = this.props;
-    dispatch(addDropZone(this.zoneId, event.nativeEvent.layout));
+    const { dispatch, zoneId } = this.props;
+    dispatch(addDropZone(zoneId, event.nativeEvent.layout));
   };
 
   render() {

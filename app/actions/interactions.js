@@ -4,7 +4,6 @@ export const CHANGE_OPERATOR = 'CHANGE_OPERATOR';
 export const END_RESTART = 'END_RESTART';
 export const RESTART_GAME = 'RESTART_GAME';
 export const REMOVE_OPERAND = 'REMOVE_OPERAND';
-export const SET_VACATING_ZONE = 'SET_VACATING_ZONE';
 import { drawNumbers } from './numbers';
 
 export const addDropZone = (zoneId, layout) => ({
@@ -40,10 +39,5 @@ export const restartGame = selectedOperator => {
 
 export const removeOperand = zoneId => ({
   type: REMOVE_OPERAND,
-  zoneId
-});
-
-export const setVacatingZone = zoneId => ({
-  type: SET_VACATING_ZONE,
   zoneId
 });

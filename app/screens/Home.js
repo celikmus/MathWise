@@ -79,7 +79,7 @@ class Home extends Component {
         <Header />
         <View style={styles.container}>
           <View style={styles.dropContainer}>
-            <DropBox>
+            <DropBox zoneId={0}>
               <Text>Drop here!</Text>
             </DropBox>
             <View style={styles.operator}>
@@ -89,7 +89,7 @@ class Home extends Component {
                 size={styles.$iconSize}
               />
             </View>
-            <DropBox>
+            <DropBox zoneId={1}>
               <Text>Drop here!</Text>
             </DropBox>
             <View style={styles.operator}>
@@ -127,7 +127,7 @@ const calculateTotal = (dropZones, operator) => {
     case operators.sum:
       return dropZones.reduce((sum, zone) => sum + (zone.value || 0), 0);
     case operators.subtract:
-      return dropZones[1].value - dropZones[0].value;
+      return dropZones[0].value - dropZones[1].value;
     default:
       return 0;
   }
@@ -135,7 +135,7 @@ const calculateTotal = (dropZones, operator) => {
 
 const select = state => {
   const {
-    selectedOperator,
+    selectedOperator = 'sum',
     dropZones,
     dropCount,
     restarting
@@ -147,7 +147,7 @@ const select = state => {
   return {
     result,
     options,
-    selectedOperator: selectedOperator || 'sum',
+    selectedOperator,
     isFilled,
     total,
     restarting
