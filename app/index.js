@@ -14,6 +14,7 @@ EStyleSheet.build({
   $secondaryGreen: '#9ce5e0',
   $primaryBlack: '#000',
   $primaryGray: '#aaa',
+  $layoutBackgroundColor: '$primaryOrange',
   $dropContainerHeight: Math.max(viewPortHeight, viewPortWidth) / 5,
   $dropZoneBuffer: viewPortWidth / 10,
   $boxSize: Math.min(viewPortHeight, viewPortWidth) / 5,

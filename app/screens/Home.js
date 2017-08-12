@@ -74,7 +74,7 @@ class Home extends Component {
   }
   render() {
     return (
-      <Container backgroundColor={this.props.backgroundColor}>
+      <Container>
         <StatusBar translucent={false} barStyle="light-content" />
         <Header />
         <View style={styles.container}>

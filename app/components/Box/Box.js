@@ -132,9 +132,20 @@ class Box extends Component {
       top: initialTop + offsetTop,
       left: initialLeft + offsetLeft
     };
-
+    const { initCoords, boxId } = this.props;
     return (
       <View>
+        {
+          <View
+            style={[
+              styles.emptySquare,
+              {
+                top: initCoords[boxId].y,
+                left: initCoords[boxId].x
+              }
+            ]}
+          />
+        }
         <Animated.View
           {...this.panResponder.panHandlers}
           style={[styles.square, style]}
@@ -143,7 +154,6 @@ class Box extends Component {
             {this.props.value}
           </Text>
         </Animated.View>
-        {/* {<View style={[style, styles.emptySquare]} />} */}
       </View>
     );
   }

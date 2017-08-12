@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import color from 'color';
 
 const styles = EStyleSheet.create({
   $backgroundColor: '$primaryBrown',
@@ -13,14 +14,15 @@ const styles = EStyleSheet.create({
     height: '$boxSize',
     borderRadius: '$borderRadius',
     justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 2
+    alignItems: 'center'
   },
   emptySquare: {
     width: '$boxSize',
     height: '$boxSize',
-    backgroundColor: 'yellow',
-    borderRadius: '$borderRadius'
+    backgroundColor: () =>
+      color(EStyleSheet.value('$layoutBackgroundColor')).darken(0.1),
+    borderRadius: '$borderRadius',
+    position: 'absolute'
   },
   text: {
     color: 'white',
