@@ -3,9 +3,18 @@ import { getRandomInteger, operators, shuffle } from '../utils/numbers';
 export const STORE_DRAWN_NUMBERS = 'STORE_DRAWN_NUMBERS';
 
 const drawDivisionNumbers = level => {
+  const set = new Set();
+  while (set.size < 4) {
+    set.add(getRandomInteger(2, 16));
+  }
+  let values = Array.from(set.values());
+  const dividend = values[0] * values[1];
+  const result = values[0];
+  values.splice(0, 1, dividend);
+  const options = shuffle(values);
   return {
-    result: 245,
-    options: [10, 15, 56]
+    result,
+    options
   };
 };
 
