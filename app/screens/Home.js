@@ -145,12 +145,12 @@ const select = state => {
   const {
     selectedOperator = 'sum',
     dropZones,
-    dropCount,
     restarting
   } = state.interactions;
   const { result, options } = state.numbers;
-  const zoneCount = dropZones.length;
-  const isFilled = zoneCount === dropCount;
+  const isFilled = dropZones.every(
+    z => z.boxId !== undefined && z.boxId !== null
+  );
   const total = isFilled ? calculateTotal(dropZones, selectedOperator) : 0;
   return {
     result,

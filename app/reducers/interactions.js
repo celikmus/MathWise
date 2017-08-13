@@ -14,7 +14,6 @@ const initialState = {
   selectedOperator: 'sum',
   initCoords: getBoxCoordinates(),
   dropZones: [],
-  dropCount: 0,
   restarting: false
 };
 
@@ -48,12 +47,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         restoringBoxId: null,
-        dropZones: zones,
-        dropCount: state.dropCount + 1
+        dropZones: zones
       };
     case CHANGE_OPERATOR:
       const { selectedOperator } = action;
-      return { ...state, selectedOperator, dropCount: 0 };
+      return { ...state, selectedOperator };
     case END_RESTART:
       return { ...state, restarting: false };
     case RESTART_GAME:
@@ -84,8 +82,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         restoringBoxId,
-        dropZones: rZones,
-        dropCount: state.dropCount - 1
+        dropZones: rZones
       };
     default:
       return state;
