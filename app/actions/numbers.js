@@ -10,8 +10,13 @@ const drawDivisionNumbers = level => {
   let values = Array.from(set.values());
   const dividend = values[0] * values[1];
   const result = values[0];
-  values.splice(0, 1, dividend);
-  const options = shuffle(values);
+  const newSet = new Set([dividend, values[1]]);
+  const maxValue = Math.max(dividend, 16);
+  while (newSet.size < 4) {
+    const newOption = getRandomInteger(2, maxValue);
+    newOption !== dividend && newSet.add(newOption);
+  }
+  const options = shuffle(Array.from(newSet));
   return {
     result,
     options
