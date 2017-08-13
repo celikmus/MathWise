@@ -25,7 +25,8 @@ class Box extends Component {
     dropZones: PropTypes.array.isRequired,
     value: PropTypes.number.isRequired,
     boxId: PropTypes.number,
-    initCoords: PropTypes.array
+    initCoords: PropTypes.array,
+    restarting: PropTypes.bool
   };
 
   panResponder = {};
@@ -100,7 +101,7 @@ class Box extends Component {
         offsetTop: 0,
         offsetLeft: 0
       }));
-      dispatch(addOperand(zone.zoneId, this.props.value));
+      dispatch(addOperand(zone.zoneId, this.props.boxId, this.props.value));
     } else {
       // done --> put back to init place
       this.setState({
@@ -159,10 +160,12 @@ class Box extends Component {
   }
 }
 
-const select = state => ({
+const select = (state, props) => ({
+  dropZones: state.interactions.dropZones,
   initCoords: state.interactions.initCoords,
-  restarting: state.interactions.restarting,
-  dropZones: state.interactions.dropZones
+  restarting:
+    state.interactions.restarting ||
+    state.interactions.restoringBoxId === props.boxId
 });
 
 export default connect(select)(Box);

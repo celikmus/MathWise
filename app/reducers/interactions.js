@@ -40,12 +40,14 @@ const reducer = (state = initialState, action) => {
         let newZone = { ...zone };
         if (zone.zoneId === action.zoneId) {
           newZone.value = action.value;
+          newZone.boxId = action.boxId;
           newZone.isEmpty = false;
         }
         return newZone;
       });
       return {
         ...state,
+        restoringBoxId: null,
         dropZones: zones,
         dropCount: state.dropCount + 1
       };
@@ -57,26 +59,31 @@ const reducer = (state = initialState, action) => {
     case RESTART_GAME:
       const initCoords = getBoxCoordinates();
       const dZones = state.dropZones.map(zone => {
-        return { ...zone, isEmpty: true, value: null };
+        return { ...zone, isEmpty: true, boxId: null, value: null };
       });
       return {
         ...initialState,
         selectedOperator: action.selectedOperator,
         restarting: true,
+        restoringBoxId: null,
         dropZones: dZones,
         initCoords
       };
     case REMOVE_OPERAND:
+      let restoringBoxId;
       const rZones = state.dropZones.map(zone => {
         let newZone = { ...zone };
         if (zone.zoneId === action.zoneId) {
-          delete newZone.value;
+          newZone.value = null;
+          restoringBoxId = newZone.boxId;
+          newZone.boxId = null;
           newZone.isEmpty = true;
         }
         return newZone;
       });
       return {
         ...state,
+        restoringBoxId,
         dropZones: rZones,
         dropCount: state.dropCount - 1
       };

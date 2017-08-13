@@ -12,9 +12,10 @@ export const addDropZone = (zoneId, layout) => ({
   layout
 });
 
-export const addOperand = (zoneId, value) => ({
+export const addOperand = (zoneId, boxId, value) => ({
   type: ADD_OPERAND,
   zoneId,
+  boxId,
   value
 });
 
