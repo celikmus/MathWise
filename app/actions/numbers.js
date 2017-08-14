@@ -1,6 +1,11 @@
 import { getRandomInteger, operators, shuffle } from '../utils/numbers';
-
+export const DECREMENT_SCORE = 'DECREMENT_SCORE';
+export const INCREMENT_SCORE = 'INCREMENT_SCORE';
 export const STORE_DRAWN_NUMBERS = 'STORE_DRAWN_NUMBERS';
+
+export const decrementScore = () => ({
+  type: DECREMENT_SCORE
+});
 
 const drawDivisionNumbers = level => {
   const set = new Set();
@@ -83,6 +88,10 @@ export const drawNumbers = (selectedOperator = 'sum', level = 0) => {
   }
   return giveNumbers();
 };
+
+export const incrementScore = () => ({
+  type: INCREMENT_SCORE
+});
 
 export const storeDrawnNumbers = drawnNumbers => ({
   type: STORE_DRAWN_NUMBERS,

@@ -13,6 +13,7 @@ import {
   endRestart,
   changeOperator
 } from '../actions/interactions';
+import { incrementScore, decrementScore } from '../actions/numbers';
 import { operators } from '../utils/numbers';
 import styles from './styles';
 
@@ -52,6 +53,20 @@ class Home extends Component {
     dispatch(restartGame(selectedOperator));
   }
 
+  componentWillUpdate(nextProps) {
+    const { selectedOperator, dispatch, total, result, isFilled } = nextProps;
+    const isSuccess = total === result;
+    const isFailed = isFilled && total !== result;
+    if (isSuccess) {
+      dispatch(incrementScore());
+      setTimeout(() => {
+        dispatch(restartGame(selectedOperator));
+      }, 1000);
+    } else if (isFailed) {
+      dispatch(decrementScore());
+    }
+  }
+
   componentDidUpdate() {
     const { dispatch, restarting } = this.props;
     restarting && dispatch(endRestart());
@@ -63,10 +78,6 @@ class Home extends Component {
     return options;
   }
   renderSuccess() {
-    const { selectedOperator, dispatch } = this.props;
-    setTimeout(() => {
-      dispatch(restartGame(selectedOperator));
-    }, 1000);
     return <Text>Success!</Text>;
   }
   renderFail() {
