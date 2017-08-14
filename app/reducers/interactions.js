@@ -46,7 +46,6 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        restoringBoxId: null,
         dropZones: zones
       };
     case CHANGE_OPERATOR:
@@ -63,17 +62,14 @@ const reducer = (state = initialState, action) => {
         ...initialState,
         selectedOperator: action.selectedOperator,
         restarting: true,
-        restoringBoxId: null,
         dropZones: dZones,
         initCoords
       };
     case REMOVE_OPERAND:
-      let restoringBoxId;
       const rZones = state.dropZones.map(zone => {
         let newZone = { ...zone };
         if (zone.zoneId === action.zoneId) {
           newZone.value = null;
-          restoringBoxId = newZone.boxId;
           newZone.boxId = null;
           newZone.isEmpty = true;
         }
@@ -81,7 +77,6 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        restoringBoxId,
         dropZones: rZones
       };
     default:

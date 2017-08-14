@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Animated, PanResponder } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  addOperand,
-  removeOperand,
-  setVacatingZone
-} from '../../actions/interactions';
+import { addOperand, removeOperand } from '../../actions/interactions';
 import styles from './styles';
 
 class Box extends Component {
@@ -41,9 +37,9 @@ class Box extends Component {
     });
   }
 
-  componentWillUpdate() {
-    if (this.props.restarting) {
-      const { initCoords, boxId } = this.props;
+  componentWillReceiveProps(nextProps) {
+    const { restarting, boxId, initCoords } = nextProps;
+    if (restarting) {
       this.setState({
         initialTop: initCoords[boxId].y,
         initialLeft: initCoords[boxId].x
@@ -72,8 +68,7 @@ class Box extends Component {
   handlePanResponderMove = (e, gestureState) => {
     const zone = this.getDropZone(gestureState);
     const { dispatch } = this.props;
-    if (zone && !zone.isEmpty) {
-      dispatch(removeOperand(zone.zoneId));
+    if (zone && zone.isEmpty) {
       this.setState({
         dragging: true,
         offsetTop: gestureState.dy,
@@ -92,7 +87,7 @@ class Box extends Component {
   handlePanResponderRelease = (e, gesture) => {
     const zone = this.getDropZone(gesture);
     const hasMoved = gesture.dx || gesture.dy;
-    const { dispatch } = this.props;
+    const { dispatch, dropZones } = this.props;
     if (zone && hasMoved && zone.isEmpty) {
       this.setState(() => ({
         dragging: false,
@@ -111,7 +106,10 @@ class Box extends Component {
         offsetTop: 0,
         offsetLeft: 0
       });
-      zone && dispatch(removeOperand(zone.zoneId));
+      const vacatedZone = dropZones.filter(
+        z => z.boxId === this.props.boxId
+      )[0];
+      vacatedZone && dispatch(removeOperand(vacatedZone.zoneId));
     }
   };
 
@@ -160,12 +158,12 @@ class Box extends Component {
   }
 }
 
-const select = (state, props) => ({
-  dropZones: state.interactions.dropZones,
-  initCoords: state.interactions.initCoords,
-  restarting:
-    state.interactions.restarting ||
-    state.interactions.restoringBoxId === props.boxId
-});
+const select = (state, props) => {
+  return {
+    dropZones: state.interactions.dropZones,
+    initCoords: state.interactions.initCoords,
+    restarting: state.interactions.restarting
+  };
+};
 
 export default connect(select)(Box);
