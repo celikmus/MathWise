@@ -4,7 +4,8 @@ import { RESTART_GAME } from '../actions/interactions';
 const { result, options } = drawNumbers();
 const initialState = {
   result,
-  options
+  options,
+  score: 0
 };
 
 const reducer = (state = initialState, action) => {
