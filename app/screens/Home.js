@@ -58,12 +58,12 @@ class Home extends Component {
     const isSuccess = total === result;
     const isFailed = isFilled && total !== result;
     if (isSuccess) {
-      dispatch(incrementScore());
+      dispatch(incrementScore(selectedOperator));
       setTimeout(() => {
         dispatch(restartGame(selectedOperator));
       }, 1000);
     } else if (isFailed) {
-      dispatch(decrementScore());
+      dispatch(decrementScore(selectedOperator));
     }
   }
 

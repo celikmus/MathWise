@@ -10,16 +10,19 @@ const { result, options } = drawNumbers();
 const initialState = {
   result,
   options,
-  score: 0
+  scores: { division: 0, multiply: 0, sum: 0, subtract: 0 }
 };
 
 const reducer = (state = initialState, action) => {
+  const newScores = { ...state.scores };
+  const score = newScores[action.selectedOperator];
   switch (action.type) {
     case DECREMENT_SCORE:
-      const score = state.score - 1;
-      return { ...state, score: score < 0 ? 0 : score };
+      newScores[action.selectedOperator] = score > 0 ? score - 1 : 0;
+      return { ...state, scores: newScores };
     case INCREMENT_SCORE:
-      return { ...state, score: state.score + 5 };
+      newScores[action.selectedOperator] = score + 5;
+      return { ...state, scores: newScores };
     case RESTART_GAME:
     case STORE_DRAWN_NUMBERS:
       return { ...state, result: action.result, options: action.options };

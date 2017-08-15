@@ -3,8 +3,9 @@ export const DECREMENT_SCORE = 'DECREMENT_SCORE';
 export const INCREMENT_SCORE = 'INCREMENT_SCORE';
 export const STORE_DRAWN_NUMBERS = 'STORE_DRAWN_NUMBERS';
 
-export const decrementScore = () => ({
-  type: DECREMENT_SCORE
+export const decrementScore = selectedOperator => ({
+  type: DECREMENT_SCORE,
+  selectedOperator
 });
 
 const drawDivisionNumbers = level => {
@@ -89,8 +90,9 @@ export const drawNumbers = (selectedOperator = 'sum', level = 0) => {
   return giveNumbers();
 };
 
-export const incrementScore = () => ({
-  type: INCREMENT_SCORE
+export const incrementScore = selectedOperator => ({
+  type: INCREMENT_SCORE,
+  selectedOperator
 });
 
 export const storeDrawnNumbers = drawnNumbers => ({
