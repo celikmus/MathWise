@@ -15,20 +15,8 @@ import {
 } from '../actions/interactions';
 import { incrementScore, decrementScore } from '../actions/numbers';
 import { operators } from '../utils/numbers';
+import { getIconName } from '../utils/icons';
 import styles from './styles';
-
-const getIconName = operator => {
-  switch (operator) {
-    case operators.multiply:
-      return 'close';
-    case operators.sum:
-      return 'plus';
-    case operators.subtract:
-      return 'minus';
-    default:
-      return operator;
-  }
-};
 
 class Home extends Component {
   constructor() {
