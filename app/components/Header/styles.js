@@ -1,6 +1,9 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
+  $textColor: 'yellow',
+  $iconColor: 'white',
+  $iconSize: 18,
   container: {
     position: 'absolute',
     top: 20,
@@ -16,16 +19,26 @@ const styles = EStyleSheet.create({
   score: {
     height: 24,
     borderRadius: 12,
-    width: 50,
+    width: 80,
     paddingRight: 6,
-    paddingLeft: 6,
+    paddingLeft: 4,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     backgroundColor: '$secondaryBlack'
   },
+  iconContainer: {
+    backgroundColor: '$secondaryGray',
+    borderRadius: '$iconSize/2',
+    width: '$iconSize',
+    height: '$iconSize'
+  },
+  icon: {
+    fontWeight: '700',
+    backgroundColor: 'transparent'
+  },
   scoreText: {
-    color: 'yellow'
+    color: '$textColor'
   }
 });
 
