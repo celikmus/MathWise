@@ -20,7 +20,7 @@ EStyleSheet.build({
   $layoutBackgroundColor: '$primaryOrange',
   $dropContainerBackground: '$primaryRed',
   $dropContainerHeight: Math.max(viewPortHeight, viewPortWidth) / 5,
-  $dropZoneBuffer: viewPortWidth / 10,
+  $dropZoneBuffer: viewPortWidth / 8,
   $boxSize: Math.min(viewPortHeight, viewPortWidth) / 5,
   $borderRadius: 4
   // outline: 1
