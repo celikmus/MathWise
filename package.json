@@ -19,7 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@expo/vector-icons": "^5.0.0",
+    "@expo/vector-icons": "^5.1.0",
     "color": "^2.0.0",
     "expo": "^19.0.0",
     "prop-types": "^15.5.10",
