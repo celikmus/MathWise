@@ -23,7 +23,7 @@ class Home extends Component {
     super();
     this.handleChangeOperator = this.handleChangeOperator.bind(this);
     Dimensions.addEventListener('change', () => {
-      this.props.dispatch(restartGame());
+      this.props.dispatch(restartGame(this.props.selectedOperator));
     });
   }
 
