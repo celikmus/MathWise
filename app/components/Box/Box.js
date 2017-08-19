@@ -6,7 +6,6 @@ import {
   PanResponder,
   LayoutAnimation
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addOperand, removeOperand } from '../../actions/interactions';
