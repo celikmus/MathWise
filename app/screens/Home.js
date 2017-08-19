@@ -22,9 +22,6 @@ class Home extends Component {
   constructor() {
     super();
     this.handleChangeOperator = this.handleChangeOperator.bind(this);
-    Dimensions.addEventListener('change', () => {
-      this.props.dispatch(restartGame(this.props.selectedOperator));
-    });
   }
 
   static propTypes = {

@@ -54,7 +54,6 @@ const reducer = (state = initialState, action) => {
     case END_RESTART:
       return { ...state, restarting: false };
     case RESTART_GAME:
-      const initCoords = getBoxCoordinates();
       const dZones = state.dropZones.map(zone => {
         return { ...zone, isEmpty: true, boxId: null, value: null };
       });
@@ -62,8 +61,7 @@ const reducer = (state = initialState, action) => {
         ...initialState,
         selectedOperator: action.selectedOperator,
         restarting: true,
-        dropZones: dZones,
-        initCoords
+        dropZones: dZones
       };
     case REMOVE_OPERAND:
       const rZones = state.dropZones.map(zone => {
