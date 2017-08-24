@@ -22,7 +22,9 @@ const Header = ({ score, passCount, selectedOperator }) =>
         {passCount}
       </Text>
     </View>
-    <View style={styles.scoreContainer}>
+    <View
+      style={[styles.scoreContainer, { width: String(score).length * 12 + 30 }]}
+    >
       <View style={styles.iconContainer}>
         <Text style={styles.icon}>
           <MaterialCommunityIcons

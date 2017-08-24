@@ -21,7 +21,6 @@ const styles = EStyleSheet.create({
     borderRadius: 12,
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
-    width: 74,
     paddingRight: 4,
     paddingLeft: 4,
     flexDirection: 'row',
