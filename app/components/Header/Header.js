@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getIconName } from '../../utils/icons';
 import styles from './styles';
 
-const Header = ({ score, selectedOperator }) =>
+const Header = ({ score, passCount, selectedOperator }) =>
   <View style={styles.container}>
     <View style={styles.passContainer}>
       <View style={styles.iconContainer}>
@@ -19,7 +19,7 @@ const Header = ({ score, selectedOperator }) =>
         </Text>
       </View>
       <Text style={styles.passText}>
-        {score}
+        {passCount}
       </Text>
     </View>
     <View style={styles.scoreContainer}>
@@ -39,13 +39,15 @@ const Header = ({ score, selectedOperator }) =>
   </View>;
 
 Header.propTypes = {
-  score: PropTypes.number
+  score: PropTypes.number,
+  passCount: PropTypes.number
 };
 
 const select = state => {
-  const selectedOperator = state.interactions.selectedOperator;
+  const { selectedOperator, passCount } = state.interactions;
   return {
     selectedOperator,
+    passCount,
     score: state.numbers.scores[selectedOperator]
   };
 };

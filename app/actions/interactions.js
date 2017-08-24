@@ -4,6 +4,7 @@ export const CHANGE_OPERATOR = 'CHANGE_OPERATOR';
 export const END_RESTART = 'END_RESTART';
 export const RESTART_GAME = 'RESTART_GAME';
 export const REMOVE_OPERAND = 'REMOVE_OPERAND';
+export const TICK_PASS_COUNT = 'TICK_PASS_COUNT';
 import { drawNumbers } from './numbers';
 
 export const addDropZone = (zoneId, layout) => ({
@@ -41,4 +42,8 @@ export const restartGame = selectedOperator => {
 export const removeOperand = zoneId => ({
   type: REMOVE_OPERAND,
   zoneId
+});
+
+export const tickPassCount = () => ({
+  type: TICK_PASS_COUNT
 });

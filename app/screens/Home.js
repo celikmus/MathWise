@@ -11,7 +11,8 @@ import { DropBox } from '../components/DropBox';
 import {
   restartGame,
   endRestart,
-  changeOperator
+  changeOperator,
+  tickPassCount
 } from '../actions/interactions';
 import { incrementScore, decrementScore } from '../actions/numbers';
 import { operators } from '../utils/numbers';
@@ -33,9 +34,10 @@ class Home extends Component {
     restarting: PropTypes.bool.isRequired
   };
 
-  handleChangeOperator(selectedOperator) {
-    const { dispatch } = this.props;
-    dispatch(restartGame(selectedOperator));
+  handleChangeOperator(pressedOperator) {
+    const { dispatch, selectedOperator } = this.props;
+    selectedOperator === pressedOperator && dispatch(tickPassCount());
+    dispatch(restartGame(pressedOperator));
   }
 
   componentWillUpdate(nextProps) {

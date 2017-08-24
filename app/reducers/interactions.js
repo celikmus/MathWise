@@ -4,7 +4,8 @@ import {
   CHANGE_OPERATOR,
   END_RESTART,
   RESTART_GAME,
-  REMOVE_OPERAND
+  REMOVE_OPERAND,
+  TICK_PASS_COUNT
 } from '../actions/interactions';
 
 import { STORE_DRAWN_NUMBERS } from '../actions/numbers';
@@ -12,6 +13,7 @@ import { getBoxCoordinates } from '../config/screen';
 
 const initialState = {
   selectedOperator: 'sum',
+  passCount: 0,
   initCoords: getBoxCoordinates(),
   dropZones: [],
   restarting: false
@@ -60,6 +62,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...initialState,
         selectedOperator: action.selectedOperator,
+        passCount: state.passCount,
         restarting: true,
         dropZones: dZones
       };
@@ -76,6 +79,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         dropZones: rZones
+      };
+    case TICK_PASS_COUNT:
+      return {
+        ...state,
+        passCount: state.passCount + 1
       };
     default:
       return state;
