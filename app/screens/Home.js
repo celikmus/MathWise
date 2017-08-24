@@ -36,7 +36,10 @@ class Home extends Component {
 
   handleChangeOperator(pressedOperator) {
     const { dispatch, selectedOperator } = this.props;
-    selectedOperator === pressedOperator && dispatch(tickPassCount());
+    if (selectedOperator === pressedOperator) {
+      dispatch(tickPassCount());
+      dispatch(decrementScore(pressedOperator));
+    }
     dispatch(restartGame(pressedOperator));
   }
 
