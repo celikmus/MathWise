@@ -16,7 +16,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'flex-end',
     paddingRight: 10
   },
-  score: {
+  scoreContainer: {
     height: 24,
     borderRadius: 12,
     width: 80,
@@ -26,6 +26,14 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '$secondaryBlack'
+  },
+  passContainer: {
+    height: 24,
+    width: 40,
+    marginRight: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   },
   iconContainer: {
     backgroundColor: '$secondaryGray',
@@ -39,6 +47,10 @@ const styles = EStyleSheet.create({
   },
   scoreText: {
     color: '$textColor'
+  },
+  passText: {
+    color: '$primaryRed',
+    marginLeft: 5
   }
 });
 

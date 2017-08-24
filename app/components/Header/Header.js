@@ -8,7 +8,21 @@ import styles from './styles';
 
 const Header = ({ score, selectedOperator }) =>
   <View style={styles.container}>
-    <View style={styles.score}>
+    <View style={styles.passContainer}>
+      <View style={styles.iconContainer}>
+        <Text style={styles.icon}>
+          <MaterialCommunityIcons
+            name={'arrow-top-right'}
+            color={styles.$iconColor}
+            size={styles.$iconSize}
+          />
+        </Text>
+      </View>
+      <Text style={styles.passText}>
+        {score}
+      </Text>
+    </View>
+    <View style={styles.scoreContainer}>
       <View style={styles.iconContainer}>
         <Text style={styles.icon}>
           <MaterialCommunityIcons
