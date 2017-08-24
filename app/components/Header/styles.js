@@ -19,13 +19,15 @@ const styles = EStyleSheet.create({
   scoreContainer: {
     height: 24,
     borderRadius: 12,
-    width: 80,
-    paddingRight: 6,
+    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4,
+    width: 74,
+    paddingRight: 4,
     paddingLeft: 4,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '$secondaryBlack'
+    backgroundColor: '$primaryGray'
   },
   passContainer: {
     height: 24,
