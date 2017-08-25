@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getIconName } from '../../utils/icons';
 import styles from './styles';
 
-const Header = ({ score, passCount, selectedOperator }) =>
+const Header = ({ onPressSettings, score, passCount, selectedOperator }) =>
   <View style={styles.container}>
     <View
       style={[styles.scoreContainer, { width: String(score).length * 12 + 30 }]}
@@ -38,7 +38,7 @@ const Header = ({ score, passCount, selectedOperator }) =>
         {passCount}
       </Text>
     </View>
-    <View style={styles.settings}>
+    <TouchableOpacity style={styles.settings} onPress={onPressSettings}>
       <Text style={styles.icon}>
         <MaterialCommunityIcons
           name={'settings'}
@@ -46,12 +46,14 @@ const Header = ({ score, passCount, selectedOperator }) =>
           size={styles.$iconSize}
         />
       </Text>
-    </View>
+    </TouchableOpacity>
   </View>;
 
 Header.propTypes = {
   score: PropTypes.number,
-  passCount: PropTypes.number
+  passCount: PropTypes.number,
+  selectedOperator: PropTypes.string,
+  onPressSettings: PropTypes.func
 };
 
 const select = state => {

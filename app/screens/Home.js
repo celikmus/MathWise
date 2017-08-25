@@ -23,6 +23,7 @@ class Home extends Component {
   constructor() {
     super();
     this.handleChangeOperator = this.handleChangeOperator.bind(this);
+    this.handlePressSettings = this.handlePressSettings.bind(this);
   }
 
   static propTypes = {
@@ -41,6 +42,10 @@ class Home extends Component {
       dispatch(decrementScore(pressedOperator));
     }
     dispatch(restartGame(pressedOperator));
+  }
+
+  handlePressSettings() {
+    this.props.navigation.navigate('Settings');
   }
 
   componentWillUpdate(nextProps) {
@@ -77,7 +82,7 @@ class Home extends Component {
     return (
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
-        <Header />
+        <Header onPressSettings={this.handlePressSettings} />
         <View style={styles.container}>
           <View style={styles.dropContainer}>
             <DropBox zoneId={0}>

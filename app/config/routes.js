@@ -1,6 +1,7 @@
 import { StackNavigator } from 'react-navigation';
 import { StatusBar } from 'react-native';
 import Home from '../screens/Home';
+import Settings from '../screens/Settings';
 
 const HomeStack = StackNavigator(
   {
@@ -9,6 +10,12 @@ const HomeStack = StackNavigator(
       navigatorOptions: {
         header: () => null,
         headerTitle: 'Home'
+      }
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: {
+        headerTitle: 'Settings'
       }
     }
   },
