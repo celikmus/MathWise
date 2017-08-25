@@ -8,20 +8,6 @@ import styles from './styles';
 
 const Header = ({ score, passCount, selectedOperator }) =>
   <View style={styles.container}>
-    <View style={styles.passContainer}>
-      <View style={styles.iconContainer}>
-        <Text style={styles.icon}>
-          <MaterialCommunityIcons
-            name={'arrow-top-right'}
-            color={styles.$iconColor}
-            size={styles.$iconSize}
-          />
-        </Text>
-      </View>
-      <Text style={styles.passText}>
-        {passCount}
-      </Text>
-    </View>
     <View
       style={[styles.scoreContainer, { width: String(score).length * 12 + 30 }]}
     >
@@ -36,6 +22,29 @@ const Header = ({ score, passCount, selectedOperator }) =>
       </View>
       <Text style={styles.scoreText}>
         {score}
+      </Text>
+    </View>
+    <View style={styles.passContainer}>
+      <View style={styles.iconContainer}>
+        <Text style={styles.icon}>
+          <MaterialCommunityIcons
+            name={'arrow-top-right'}
+            color={styles.$iconColor}
+            size={styles.$iconSize}
+          />
+        </Text>
+      </View>
+      <Text style={styles.passText}>
+        {passCount}
+      </Text>
+    </View>
+    <View style={styles.settings}>
+      <Text style={styles.icon}>
+        <MaterialCommunityIcons
+          name={'settings'}
+          color={styles.$iconColor}
+          size={styles.$iconSize}
+        />
       </Text>
     </View>
   </View>;

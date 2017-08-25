@@ -13,7 +13,6 @@ const styles = EStyleSheet.create({
     backgroundColor: '$secondaryGray',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
     paddingRight: 10
   },
   scoreContainer: {
@@ -23,6 +22,7 @@ const styles = EStyleSheet.create({
     borderBottomRightRadius: 4,
     paddingRight: 4,
     paddingLeft: 4,
+    marginLeft: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -31,7 +31,6 @@ const styles = EStyleSheet.create({
   passContainer: {
     height: 24,
     width: 40,
-    marginRight: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end'
@@ -52,6 +51,9 @@ const styles = EStyleSheet.create({
   passText: {
     color: '$primaryRed',
     marginLeft: 5
+  },
+  settings: {
+    marginLeft: 'auto'
   }
 });
 
