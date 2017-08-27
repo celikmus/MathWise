@@ -35,15 +35,18 @@ class Home extends Component {
     result: PropTypes.number,
     options: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
-    restarting: PropTypes.bool.isRequired
+    restarting: PropTypes.bool.isRequired,
+    passCount: PropTypes.number
   };
 
   handleChangeOperator(pressedOperator) {
-    const { dispatch, selectedOperator } = this.props;
+    const { dispatch, selectedOperator, passCount } = this.props;
     if (selectedOperator === pressedOperator) {
-      dispatch(tickPassCount(selectedOperator));
-      dispatch(decrementScore(pressedOperator));
-      dispatch(restartGame(pressedOperator));
+      if (passCount < 5) {
+        dispatch(tickPassCount(selectedOperator));
+        dispatch(decrementScore(pressedOperator));
+        dispatch(restartGame(pressedOperator));
+      }
     } else {
       dispatch(switchOperator(pressedOperator));
     }
@@ -159,7 +162,7 @@ const select = state => {
     dropZones,
     restarting
   } = state.interactions;
-  const { result, options } = state.numbers;
+  const { result, options, passCount } = state.numbers;
   const isFilled = dropZones.every(
     z => z.boxId !== undefined && z.boxId !== null
   );
@@ -167,6 +170,7 @@ const select = state => {
   return {
     result: result[selectedOperator],
     options: options[selectedOperator],
+    passCount: passCount[selectedOperator],
     selectedOperator,
     isFilled,
     total,
