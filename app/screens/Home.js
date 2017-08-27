@@ -11,7 +11,6 @@ import { DropBox } from '../components/DropBox';
 import {
   restartGame,
   endRestart,
-  changeOperator,
   switchOperator,
   tickPassCount
 } from '../actions/interactions';
@@ -41,8 +40,10 @@ class Home extends Component {
     if (selectedOperator === pressedOperator) {
       dispatch(tickPassCount());
       dispatch(decrementScore(pressedOperator));
+      dispatch(restartGame(pressedOperator));
+    } else {
+      dispatch(switchOperator(pressedOperator));
     }
-    dispatch(switchOperator(pressedOperator));
   }
 
   handlePressSettings() {
