@@ -48,12 +48,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         dropZones: zones
       };
-    case SWITCH_OPERATOR:
-      const { selectedOperator } = action;
-      return { ...state, selectedOperator };
     case END_RESTART:
       return { ...state, restarting: false };
     case RESTART_GAME:
+    case SWITCH_OPERATOR:
       const dZones = state.dropZones.map(zone => {
         return { ...zone, isEmpty: true, boxId: null, value: null };
       });
