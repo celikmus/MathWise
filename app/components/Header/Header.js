@@ -61,10 +61,10 @@ Header.propTypes = {
 };
 
 const select = state => {
-  const { selectedOperator, passCount } = state.interactions;
+  const { selectedOperator } = state.interactions;
   return {
     selectedOperator,
-    passCount,
+    passCount: state.numbers.passCount,
     score: state.numbers.scores[selectedOperator]
   };
 };

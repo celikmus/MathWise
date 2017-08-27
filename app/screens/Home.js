@@ -11,10 +11,13 @@ import { DropBox } from '../components/DropBox';
 import {
   restartGame,
   endRestart,
-  switchOperator,
-  tickPassCount
+  switchOperator
 } from '../actions/interactions';
-import { incrementScore, decrementScore } from '../actions/numbers';
+import {
+  incrementScore,
+  decrementScore,
+  tickPassCount
+} from '../actions/numbers';
 import { operators } from '../utils/numbers';
 import { getIconName } from '../utils/icons';
 import styles from './styles';

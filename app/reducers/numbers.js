@@ -1,7 +1,8 @@
 import {
   DECREMENT_SCORE,
   drawNumbers,
-  INCREMENT_SCORE
+  INCREMENT_SCORE,
+  TICK_PASS_COUNT
 } from '../actions/numbers';
 import { RESTART_GAME, SWITCH_OPERATOR } from '../actions/interactions';
 
@@ -13,6 +14,7 @@ const initialState = {
     sum: result,
     subtract: undefined
   },
+  passCount: 0,
   options: { division: [], multiply: [], sum: options, subtract: [] },
   scores: { division: 0, multiply: 0, sum: 0, subtract: 0 }
 };
@@ -41,8 +43,14 @@ const reducer = (state = initialState, action) => {
       }
       return {
         ...state,
+        passCount: state.passCount,
         result: { ...state.result, [action.selectedOperator]: result },
         options: { ...state.options, [action.selectedOperator]: options }
+      };
+    case TICK_PASS_COUNT:
+      return {
+        ...state,
+        passCount: state.passCount + 1
       };
     default:
       return state;

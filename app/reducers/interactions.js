@@ -5,15 +5,13 @@ import {
   END_RESTART,
   RESTART_GAME,
   REMOVE_OPERAND,
-  SWITCH_OPERATOR,
-  TICK_PASS_COUNT
+  SWITCH_OPERATOR
 } from '../actions/interactions';
 
 import { getBoxCoordinates } from '../config/screen';
 
 const initialState = {
   selectedOperator: 'sum',
-  passCount: 0,
   initCoords: getBoxCoordinates(),
   dropZones: [],
   restarting: false
@@ -50,20 +48,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         dropZones: zones
       };
-    case CHANGE_OPERATOR:
+    case SWITCH_OPERATOR:
       const { selectedOperator } = action;
       return { ...state, selectedOperator };
     case END_RESTART:
       return { ...state, restarting: false };
     case RESTART_GAME:
-    case SWITCH_OPERATOR:
       const dZones = state.dropZones.map(zone => {
         return { ...zone, isEmpty: true, boxId: null, value: null };
       });
       return {
         ...initialState,
         selectedOperator: action.selectedOperator,
-        passCount: state.passCount,
         restarting: true,
         dropZones: dZones
       };
@@ -80,11 +76,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         dropZones: rZones
-      };
-    case TICK_PASS_COUNT:
-      return {
-        ...state,
-        passCount: state.passCount + 1
       };
     default:
       return state;
