@@ -96,6 +96,7 @@ export const incrementScore = selectedOperator => ({
   selectedOperator
 });
 
-export const tickPassCount = () => ({
-  type: TICK_PASS_COUNT
+export const tickPassCount = selectedOperator => ({
+  type: TICK_PASS_COUNT,
+  selectedOperator
 });

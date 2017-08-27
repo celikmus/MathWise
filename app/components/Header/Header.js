@@ -64,7 +64,7 @@ const select = state => {
   const { selectedOperator } = state.interactions;
   return {
     selectedOperator,
-    passCount: state.numbers.passCount,
+    passCount: state.numbers.passCount[selectedOperator],
     score: state.numbers.scores[selectedOperator]
   };
 };
