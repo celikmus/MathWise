@@ -94,8 +94,3 @@ export const incrementScore = selectedOperator => ({
   type: INCREMENT_SCORE,
   selectedOperator
 });
-
-export const storeDrawnNumbers = drawnNumbers => ({
-  type: STORE_DRAWN_NUMBERS,
-  ...drawnNumbers()
-});

@@ -5,10 +5,10 @@ import {
   END_RESTART,
   RESTART_GAME,
   REMOVE_OPERAND,
+  SWITCH_OPERATOR,
   TICK_PASS_COUNT
 } from '../actions/interactions';
 
-import { STORE_DRAWN_NUMBERS } from '../actions/numbers';
 import { getBoxCoordinates } from '../config/screen';
 
 const initialState = {
@@ -56,6 +56,7 @@ const reducer = (state = initialState, action) => {
     case END_RESTART:
       return { ...state, restarting: false };
     case RESTART_GAME:
+    case SWITCH_OPERATOR:
       const dZones = state.dropZones.map(zone => {
         return { ...zone, isEmpty: true, boxId: null, value: null };
       });

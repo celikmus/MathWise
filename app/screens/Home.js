@@ -12,6 +12,7 @@ import {
   restartGame,
   endRestart,
   changeOperator,
+  switchOperator,
   tickPassCount
 } from '../actions/interactions';
 import { incrementScore, decrementScore } from '../actions/numbers';
@@ -41,7 +42,7 @@ class Home extends Component {
       dispatch(tickPassCount());
       dispatch(decrementScore(pressedOperator));
     }
-    dispatch(restartGame(pressedOperator));
+    dispatch(switchOperator(pressedOperator));
   }
 
   handlePressSettings() {
@@ -67,10 +68,11 @@ class Home extends Component {
     restarting && dispatch(endRestart());
   }
   renderOptions() {
-    const options = this.props.options.map((option, i) =>
+    const { options, selectedOperator } = this.props;
+    const currentOptions = options.map((option, i) =>
       <Box key={i} boxId={i} value={option} />
     );
-    return options;
+    return currentOptions;
   }
   renderSuccess() {
     return <Text>Success!</Text>;
@@ -159,8 +161,8 @@ const select = state => {
   );
   const total = isFilled ? calculateTotal(dropZones, selectedOperator) : 0;
   return {
-    result,
-    options,
+    result: result[selectedOperator],
+    options: options[selectedOperator],
     selectedOperator,
     isFilled,
     total,

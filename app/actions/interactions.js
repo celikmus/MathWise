@@ -4,6 +4,7 @@ export const CHANGE_OPERATOR = 'CHANGE_OPERATOR';
 export const END_RESTART = 'END_RESTART';
 export const RESTART_GAME = 'RESTART_GAME';
 export const REMOVE_OPERAND = 'REMOVE_OPERAND';
+export const SWITCH_OPERATOR = 'SWITCH_OPERATOR';
 export const TICK_PASS_COUNT = 'TICK_PASS_COUNT';
 import { drawNumbers } from './numbers';
 
@@ -42,6 +43,11 @@ export const restartGame = selectedOperator => {
 export const removeOperand = zoneId => ({
   type: REMOVE_OPERAND,
   zoneId
+});
+
+export const switchOperator = selectedOperator => ({
+  type: SWITCH_OPERATOR,
+  selectedOperator
 });
 
 export const tickPassCount = () => ({
