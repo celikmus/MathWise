@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
   const score = newScores[action.selectedOperator];
   switch (action.type) {
     case DECREMENT_SCORE:
-      newScores[action.selectedOperator] = score > 0 ? score - 1 : 0;
+      newScores[action.selectedOperator] = score > 3 ? score - 3 : 0;
       return { ...state, scores: newScores };
     case INCREMENT_SCORE:
       newScores[action.selectedOperator] = score + 5;
