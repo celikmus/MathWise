@@ -37,7 +37,11 @@ const reducer = (state = initialState, action) => {
     case ADD_OPERAND:
       const zones = state.dropZones.map(zone => {
         let newZone = { ...zone };
-        if (zone.zoneId === action.zoneId) {
+        if (zone.value === action.value) {
+          delete newZone.value;
+          delete newZone.boxId;
+          newZone.isEmpty = true;
+        } else if (zone.zoneId === action.zoneId) {
           newZone.value = action.value;
           newZone.boxId = action.boxId;
           newZone.isEmpty = false;
