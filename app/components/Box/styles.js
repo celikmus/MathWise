@@ -2,8 +2,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import color from 'color';
 
 const styles = EStyleSheet.create({
-  $backgroundColor: '$primaryBrown',
-  $draggingBackground: '$secondaryBrown',
+  $backgroundColor: '$boxBackground',
+  $draggingBackground: '$boxDragBackground',
   $containerHeight: '$dropContainerHeight',
   $boxBuffer: '$dropZoneBuffer',
   $initialTop: 0,

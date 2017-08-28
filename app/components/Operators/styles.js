@@ -1,8 +1,9 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
-  $underlayColor: '$primaryGray',
-  $iconColor: '#fff',
+  $iconColor: 'white',
+  $iconColorSelected: '$primaryYellow',
+  $inactiveOpacity: 0.5,
   $iconSize: 48,
   container: {
     position: 'absolute',
@@ -18,23 +19,11 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     width: 80
   },
-  division: {
-    backgroundColor: '$primaryBlue'
-  },
-  multiply: {
-    backgroundColor: '$primaryBlack'
-  },
-  sum: {
-    backgroundColor: '$primaryGreen'
-  },
-  subtract: {
-    backgroundColor: '$primaryBrown'
-  },
   selected: {
-    backgroundColor: '$primaryGreen'
+    backgroundColor: '$primaryRed'
   },
   notSelected: {
-    backgroundColor: '$primaryGray'
+    backgroundColor: '$operatorsBackground'
   }
 });
 

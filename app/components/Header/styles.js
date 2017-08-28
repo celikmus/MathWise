@@ -10,7 +10,7 @@ const styles = EStyleSheet.create({
     right: 0,
     left: 0,
     height: 30,
-    backgroundColor: '$secondaryGray',
+    backgroundColor: '$headerBackground',
     flexDirection: 'row',
     alignItems: 'center',
     paddingRight: 10
@@ -49,7 +49,7 @@ const styles = EStyleSheet.create({
     color: '$textColor'
   },
   passText: {
-    color: '$primaryRed',
+    color: '$secondaryRed',
     marginLeft: 5
   },
   settings: {
