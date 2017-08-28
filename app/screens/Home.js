@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar, Dimensions } from 'react-native';
+import { View, Text, StatusBar, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -8,6 +8,7 @@ import { Header } from '../components/Header';
 import { Operators } from '../components/Operators';
 import { Box } from '../components/Box';
 import { DropBox } from '../components/DropBox';
+import color from 'color';
 import {
   restartGame,
   endRestart,
@@ -27,6 +28,7 @@ class Home extends Component {
     super();
     this.handleChangeOperator = this.handleChangeOperator.bind(this);
     this.handlePressSettings = this.handlePressSettings.bind(this);
+    this.animationHeight = new Animated.Value(0);
   }
 
   static propTypes = {
@@ -82,12 +84,30 @@ class Home extends Component {
     return currentOptions;
   }
   renderSuccess() {
-    return <Text>Success!</Text>;
+    return (
+      <Animated.View
+        style={[styles.successBlock, { height: this.animationHeight }]}
+      >
+        <Text style={styles.successText}>Well done!</Text>
+      </Animated.View>
+    );
   }
   renderFail() {
-    return <Text>Incorrect!</Text>;
+    return (
+      !!this.props.total &&
+      <View style={styles.failBlock}>
+        <Text>Incorrect, try again.</Text>
+      </View>
+    );
   }
   render() {
+    const { isFilled, result, total, selectedOperator } = this.props;
+    const isCorrect = isFilled && result === total;
+    isCorrect &&
+      Animated.timing(this.animationHeight, {
+        toValue: 1500,
+        duration: 800
+      }).start();
     return (
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
@@ -99,7 +119,7 @@ class Home extends Component {
             </DropBox>
             <View style={styles.operator}>
               <MaterialCommunityIcons
-                name={getIconName(this.props.selectedOperator)}
+                name={getIconName(selectedOperator)}
                 color={styles.$iconColor}
                 size={styles.$iconSize}
               />
@@ -116,20 +136,18 @@ class Home extends Component {
             </View>
             <View style={styles.result}>
               <Text style={styles.resultText}>
-                {this.props.result}
+                {result}
               </Text>
             </View>
           </View>
-          {this.props.isFilled &&
+          {isFilled &&
             <View style={styles.message}>
-              {this.props.result === this.props.total
-                ? this.renderSuccess()
-                : this.renderFail()}
+              {isCorrect ? this.renderSuccess() : this.renderFail()}
             </View>}
           {this.renderOptions()}
         </View>
         <Operators
-          selectedOperator={this.props.selectedOperator}
+          selectedOperator={selectedOperator}
           changeOperator={o => this.handleChangeOperator(o)}
         />
       </Container>

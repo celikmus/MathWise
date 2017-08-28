@@ -41,8 +41,21 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     top: '$dropContainerHeight',
     width: '100%',
-    padding: 10,
     alignItems: 'center'
+  },
+  successBlock: {
+    backgroundColor: '$primaryOrange',
+    alignItems: 'center',
+    width: '100%',
+    paddingTop: 20
+  },
+  successText: {
+    backgroundColor: 'transparent',
+    textShadowColor: '$primaryGray',
+    textDecorationStyle: 'double'
+  },
+  failBlock: {
+    margin: 10
   }
 });
 
