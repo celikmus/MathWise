@@ -26,7 +26,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '$primaryGray'
+    backgroundColor: '$layoutBackgroundColor'
   },
   passContainer: {
     height: 24,
@@ -36,7 +36,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'flex-end'
   },
   iconContainer: {
-    backgroundColor: '$secondaryGray',
+    backgroundColor: '$headerBackground',
     borderRadius: '$iconSize/2',
     width: '$iconSize',
     height: '$iconSize'

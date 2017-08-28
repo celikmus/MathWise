@@ -12,7 +12,7 @@ const styles = EStyleSheet.create({
       color(EStyleSheet.value('$dropContainerBackground')).darken(0.2)
   },
   text: {
-    color: '$primaryGray',
+    color: '$primaryYellow',
     fontSize: 12
   }
 });
