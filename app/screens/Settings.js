@@ -1,11 +1,13 @@
 import React from 'react';
-import { ScrollView, Text, TouchableHighlight, StatusBar } from 'react-native';
+import { Text, StatusBar } from 'react-native';
+import { Container } from '../components/Container';
+import styles from './styles';
 
 const Settings = () =>
-  <ScrollView>
-    <StatusBar translucent={true} barStyle="default" />
+  <Container>
+    <StatusBar translucent={false} barStyle="default" />
     <Text>Settings page lala...</Text>
-  </ScrollView>;
+  </Container>;
 
 Settings.navigationOptions = {
   headerTitle: 'Settings'
