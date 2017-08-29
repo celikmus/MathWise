@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { ScrollView, Text, TouchableHighlight, StatusBar } from 'react-native';
 
 const Settings = () =>
-  <View>
-    <StatusBar translucent={false} barStyle="default" />
+  <ScrollView>
+    <StatusBar translucent={true} barStyle="default" />
     <Text>Settings page lala...</Text>
-  </View>;
+  </ScrollView>;
 
 Settings.navigationOptions = {
-  title: 'Settings'
+  headerTitle: 'Settings'
 };
 
 export default Settings;

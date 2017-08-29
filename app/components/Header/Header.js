@@ -46,11 +46,7 @@ const Header = ({ onPressSettings, score, passCount, selectedOperator }) =>
         {passCount}
       </Text>
     </View>
-    <TouchableOpacity
-      style={styles.settings}
-      disabled
-      onPress={onPressSettings}
-    >
+    <TouchableOpacity style={styles.settings} onPress={onPressSettings}>
       <Text style={styles.icon}>
         <MaterialCommunityIcons
           name={'settings'}

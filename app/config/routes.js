@@ -10,24 +10,34 @@ const SettingsStack = StackNavigator(
     }
   },
   {
-    headerMode: 'screen',
-    cardStyle: { paddingTop: StatusBar.currentHeight }
+    headerMode: 'none'
+  }
+);
+
+const HomeStack = StackNavigator(
+  {
+    Home: {
+      screen: Home,
+      navigationOptions: {
+        header: () => null
+      }
+    }
+  },
+  {
+    headerMode: 'none'
   }
 );
 
 export default StackNavigator(
   {
     Home: {
-      screen: Home,
-      navigatorOptions: {
-        header: () => null
-      }
+      screen: HomeStack
     },
     Settings: {
       screen: SettingsStack
     }
   },
   {
-    headerMode: 'none'
+    headerMode: 'screen'
   }
 );
