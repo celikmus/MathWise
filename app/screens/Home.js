@@ -42,13 +42,11 @@ class Home extends Component {
   };
 
   handleChangeOperator(pressedOperator) {
-    const { dispatch, selectedOperator, passCount } = this.props;
+    const { dispatch, selectedOperator } = this.props;
     if (selectedOperator === pressedOperator) {
-      if (passCount < 5) {
-        dispatch(tickPassCount(selectedOperator));
-        dispatch(decrementScore(pressedOperator));
-        dispatch(restartGame(pressedOperator));
-      }
+      dispatch(tickPassCount(selectedOperator));
+      dispatch(decrementScore(pressedOperator));
+      dispatch(restartGame(pressedOperator));
     } else {
       dispatch(switchOperator(pressedOperator));
     }
@@ -96,7 +94,7 @@ class Home extends Component {
     return (
       !!this.props.total &&
       <View style={styles.failBlock}>
-        <Text>Incorrect, try again.</Text>
+        <Text>Try again.</Text>
       </View>
     );
   }

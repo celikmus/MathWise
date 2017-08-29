@@ -9,7 +9,10 @@ import styles from './styles';
 const Header = ({ onPressSettings, score, passCount, selectedOperator }) =>
   <View style={styles.container}>
     <View
-      style={[styles.scoreContainer, { width: String(score).length * 12 + 30 }]}
+      style={[
+        styles.scoreContainer,
+        { width: score.toFixed().length * 12 + 30 }
+      ]}
     >
       <View style={styles.iconContainer}>
         <Text style={styles.icon}>
@@ -24,7 +27,12 @@ const Header = ({ onPressSettings, score, passCount, selectedOperator }) =>
         {score}
       </Text>
     </View>
-    <View style={styles.passContainer}>
+    <View
+      style={[
+        styles.passContainer,
+        { width: passCount.toFixed().length * 8 + 30 }
+      ]}
+    >
       <View style={styles.iconContainer}>
         <Text style={styles.icon}>
           <MaterialCommunityIcons
