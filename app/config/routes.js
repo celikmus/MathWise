@@ -3,38 +3,17 @@ import { StatusBar } from 'react-native';
 import Home from '../screens/Home';
 import Settings from '../screens/Settings';
 
-const SettingsStack = StackNavigator(
-  {
-    Settings: {
-      screen: Settings
-    }
-  },
-  {
-    headerMode: 'none'
-  }
-);
-
-const HomeStack = StackNavigator(
+export default StackNavigator(
   {
     Home: {
       screen: Home,
       navigationOptions: {
-        header: () => null
+        header: () => null,
+        headerMode: 'none'
       }
-    }
-  },
-  {
-    headerMode: 'none'
-  }
-);
-
-export default StackNavigator(
-  {
-    Home: {
-      screen: HomeStack
     },
     Settings: {
-      screen: SettingsStack
+      screen: Settings
     }
   },
   {
