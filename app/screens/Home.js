@@ -82,7 +82,7 @@ class Home extends Component {
       <Animated.View
         style={[styles.successBlock, { height: this.animationHeight }]}
       >
-        <Text style={styles.successText}>Well done!</Text>
+        <Text style={styles.successText}>WELL DONE!</Text>
       </Animated.View>
     );
   }
@@ -90,7 +90,7 @@ class Home extends Component {
     return (
       !!this.props.total &&
       <View style={styles.failBlock}>
-        <Text>Try again.</Text>
+        <Text style={styles.failText}>Try again...</Text>
       </View>
     );
   }

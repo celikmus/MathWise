@@ -51,11 +51,16 @@ const styles = EStyleSheet.create({
   },
   successText: {
     backgroundColor: 'transparent',
-    textShadowColor: '$primaryGray',
-    textDecorationStyle: 'double'
+    fontSize: 28,
+    color: '$primaryYellow',
+    fontWeight: '700',
+    letterSpacing: 1
   },
   failBlock: {
     margin: 10
+  },
+  failText: {
+    letterSpacing: 1
   }
 });
 
