@@ -6,7 +6,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getIconName } from '../../utils/icons';
 import styles from './styles';
 
-const Header = ({ onPressSettings, score, passCount, selectedOperator }) =>
+const Header = ({
+  onPressSettings,
+  onPressRestart,
+  score,
+  passCount,
+  selectedOperator
+}) =>
   <View style={styles.container}>
     <View
       style={[
@@ -46,6 +52,15 @@ const Header = ({ onPressSettings, score, passCount, selectedOperator }) =>
         {passCount}
       </Text>
     </View>
+    <TouchableOpacity style={styles.restart} onPress={onPressRestart}>
+      <Text style={styles.icon}>
+        <MaterialCommunityIcons
+          name={'autorenew'}
+          color={styles.$iconColor}
+          size={styles.$iconSize}
+        />
+      </Text>
+    </TouchableOpacity>
     <TouchableOpacity style={styles.settings} onPress={onPressSettings}>
       <Text style={styles.icon}>
         <MaterialCommunityIcons
@@ -61,7 +76,8 @@ Header.propTypes = {
   score: PropTypes.number,
   passCount: PropTypes.number,
   selectedOperator: PropTypes.string,
-  onPressSettings: PropTypes.func
+  onPressSettings: PropTypes.func,
+  onPressRestart: PropTypes.func
 };
 
 const select = state => {

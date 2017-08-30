@@ -52,8 +52,11 @@ const styles = EStyleSheet.create({
     color: '$secondaryRed',
     marginLeft: 5
   },
-  settings: {
+  restart: {
     marginLeft: 'auto'
+  },
+  settings: {
+    marginLeft: 10
   }
 });
 
