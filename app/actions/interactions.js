@@ -1,7 +1,7 @@
 export const ADD_DROP_ZONE = 'ADD_DROP_ZONE';
 export const ADD_OPERAND = 'ADD_OPERAND';
 export const END_RESTART = 'END_RESTART';
-export const RESTART_GAME = 'RESTART_GAME';
+export const RESET_GAME = 'RESET_GAME';
 export const REMOVE_OPERAND = 'REMOVE_OPERAND';
 export const SWITCH_OPERATOR = 'SWITCH_OPERATOR';
 import { drawNumbers } from './numbers';
@@ -23,10 +23,10 @@ export const endRestart = () => ({
   type: END_RESTART
 });
 
-export const restartGame = selectedOperator => {
+export const resetGame = selectedOperator => {
   const { result, options } = drawNumbers(selectedOperator);
   return {
-    type: RESTART_GAME,
+    type: RESET_GAME,
     selectedOperator,
     result,
     options

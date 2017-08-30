@@ -3,7 +3,7 @@ import {
   ADD_OPERAND,
   CHANGE_OPERATOR,
   END_RESTART,
-  RESTART_GAME,
+  RESET_GAME,
   REMOVE_OPERAND,
   SWITCH_OPERATOR
 } from '../actions/interactions';
@@ -54,7 +54,7 @@ const reducer = (state = initialState, action) => {
       };
     case END_RESTART:
       return { ...state, restarting: false };
-    case RESTART_GAME:
+    case RESET_GAME:
     case SWITCH_OPERATOR:
       const dZones = state.dropZones.map(zone => {
         return { ...zone, isEmpty: true, boxId: null, value: null };

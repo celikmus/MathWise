@@ -9,11 +9,7 @@ import { Operators } from '../components/Operators';
 import { Box } from '../components/Box';
 import { DropBox } from '../components/DropBox';
 import color from 'color';
-import {
-  restartGame,
-  endRestart,
-  switchOperator
-} from '../actions/interactions';
+import { resetGame, endRestart, switchOperator } from '../actions/interactions';
 import {
   incrementScore,
   decrementScore,
@@ -46,7 +42,7 @@ class Home extends Component {
     if (selectedOperator === pressedOperator) {
       dispatch(tickPassCount(selectedOperator));
       dispatch(decrementScore(pressedOperator));
-      dispatch(restartGame(pressedOperator));
+      dispatch(resetGame(pressedOperator));
     } else {
       dispatch(switchOperator(pressedOperator));
     }
@@ -63,7 +59,7 @@ class Home extends Component {
     if (isSuccess) {
       dispatch(incrementScore(selectedOperator));
       setTimeout(() => {
-        dispatch(restartGame(selectedOperator));
+        dispatch(resetGame(selectedOperator));
       }, 1000);
     } else if (isFailed) {
       dispatch(decrementScore(selectedOperator));
