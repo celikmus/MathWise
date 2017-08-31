@@ -28,7 +28,7 @@ class Box extends Component {
     value: PropTypes.number.isRequired,
     boxId: PropTypes.number,
     initCoords: PropTypes.array,
-    restarting: PropTypes.bool
+    resetting: PropTypes.bool
   };
 
   panResponder = {};
@@ -44,8 +44,8 @@ class Box extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { restarting, boxId, initCoords } = nextProps;
-    if (restarting) {
+    const { resetting, boxId, initCoords } = nextProps;
+    if (resetting) {
       this.setState({
         initialTop: initCoords[boxId].y,
         initialLeft: initCoords[boxId].x
@@ -172,7 +172,7 @@ const select = (state, props) => {
   return {
     dropZones: state.interactions.dropZones,
     initCoords: state.interactions.initCoords,
-    restarting: state.interactions.restarting
+    resetting: state.interactions.resetting
   };
 };
 

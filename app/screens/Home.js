@@ -39,7 +39,7 @@ class Home extends Component {
     result: PropTypes.number,
     options: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
-    restarting: PropTypes.bool.isRequired,
+    resetting: PropTypes.bool.isRequired,
     passCount: PropTypes.number
   };
 
@@ -78,8 +78,8 @@ class Home extends Component {
   }
 
   componentDidUpdate() {
-    const { dispatch, restarting } = this.props;
-    restarting && dispatch(endRestart());
+    const { dispatch, resetting } = this.props;
+    resetting && dispatch(endRestart());
   }
   renderOptions() {
     const { options, selectedOperator } = this.props;
@@ -183,11 +183,7 @@ const calculateTotal = (dropZones, operator) => {
 };
 
 const select = state => {
-  const {
-    selectedOperator = 'sum',
-    dropZones,
-    restarting
-  } = state.interactions;
+  const { selectedOperator = 'sum', dropZones, resetting } = state.interactions;
   const { result, options, passCount } = state.numbers;
   const isFilled = dropZones.every(
     z => z.boxId !== undefined && z.boxId !== null
@@ -200,7 +196,7 @@ const select = state => {
     selectedOperator,
     isFilled,
     total,
-    restarting
+    resetting
   };
 };
 
