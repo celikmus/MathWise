@@ -9,7 +9,12 @@ import { Operators } from '../components/Operators';
 import { Box } from '../components/Box';
 import { DropBox } from '../components/DropBox';
 import color from 'color';
-import { resetGame, endRestart, switchOperator } from '../actions/interactions';
+import {
+  resetGame,
+  endRestart,
+  switchOperator,
+  restartGame
+} from '../actions/interactions';
 import {
   incrementScore,
   decrementScore,
@@ -24,6 +29,7 @@ class Home extends Component {
     super();
     this.handleChangeOperator = this.handleChangeOperator.bind(this);
     this.handlePressSettings = this.handlePressSettings.bind(this);
+    this.handlePressRestart = this.handlePressRestart.bind(this);
     this.animationHeight = new Animated.Value(0);
   }
 
@@ -50,6 +56,11 @@ class Home extends Component {
 
   handlePressSettings() {
     this.props.navigation.navigate('Settings');
+  }
+
+  handlePressRestart() {
+    const { dispatch, selectedOperator } = this.props;
+    dispatch(restartGame(selectedOperator));
   }
 
   componentWillUpdate(nextProps) {
@@ -105,7 +116,10 @@ class Home extends Component {
     return (
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
-        <Header onPressSettings={this.handlePressSettings} />
+        <Header
+          onPressSettings={this.handlePressSettings}
+          onPressRestart={this.handlePressRestart}
+        />
         <View style={styles.container}>
           <View style={styles.dropContainer}>
             <DropBox zoneId={0}>
