@@ -2,7 +2,7 @@ import {
   ADD_DROP_ZONE,
   ADD_OPERAND,
   CHANGE_OPERATOR,
-  END_RESTART,
+  END_RESET,
   RESET_GAME,
   REMOVE_OPERAND,
   SWITCH_OPERATOR
@@ -52,7 +52,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         dropZones: zones
       };
-    case END_RESTART:
+    case END_RESET:
       return { ...state, resetting: false };
     case RESET_GAME:
     case SWITCH_OPERATOR:

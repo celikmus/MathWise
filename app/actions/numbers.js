@@ -1,6 +1,7 @@
 import { getRandomInteger, operators, shuffle } from '../utils/numbers';
 export const DECREMENT_SCORE = 'DECREMENT_SCORE';
 export const INCREMENT_SCORE = 'INCREMENT_SCORE';
+export const RESET_COUNTERS = 'RESET_COUNTERS';
 export const STORE_DRAWN_NUMBERS = 'STORE_DRAWN_NUMBERS';
 export const TICK_PASS_COUNT = 'TICK_PASS_COUNT';
 
@@ -94,6 +95,10 @@ export const drawNumbers = (selectedOperator = 'sum', level = 0) => {
 export const incrementScore = selectedOperator => ({
   type: INCREMENT_SCORE,
   selectedOperator
+});
+
+export const resetCounters = () => ({
+  type: RESET_COUNTERS
 });
 
 export const tickPassCount = selectedOperator => ({

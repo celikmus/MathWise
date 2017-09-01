@@ -2,6 +2,7 @@ import {
   DECREMENT_SCORE,
   drawNumbers,
   INCREMENT_SCORE,
+  RESET_COUNTERS,
   TICK_PASS_COUNT
 } from '../actions/numbers';
 import { RESET_GAME, SWITCH_OPERATOR } from '../actions/interactions';
@@ -24,6 +25,12 @@ const reducer = (state = initialState, action) => {
     case INCREMENT_SCORE:
       newScores[action.selectedOperator] = score + 5;
       return { ...state, scores: newScores };
+    case RESET_COUNTERS:
+      return {
+        ...state,
+        scores: initialState.scores,
+        passCount: initialState.passCount
+      };
     case RESET_GAME:
       return {
         ...state,
