@@ -11,14 +11,15 @@ import { DropBox } from '../components/DropBox';
 import color from 'color';
 import {
   resetGame,
-  endRestart,
+  endReset,
   switchOperator,
   restartGame
 } from '../actions/interactions';
 import {
   incrementScore,
   decrementScore,
-  tickPassCount
+  tickPassCount,
+  resetCounters
 } from '../actions/numbers';
 import { operators } from '../utils/numbers';
 import { getIconName } from '../utils/icons';
@@ -60,7 +61,8 @@ class Home extends Component {
 
   handlePressRestart() {
     const { dispatch, selectedOperator } = this.props;
-    dispatch(restartGame(selectedOperator));
+    dispatch(resetGame(selectedOperator));
+    dispatch(resetCounters());
   }
 
   componentWillUpdate(nextProps) {
@@ -79,7 +81,7 @@ class Home extends Component {
 
   componentDidUpdate() {
     const { dispatch, resetting } = this.props;
-    resetting && dispatch(endRestart());
+    resetting && dispatch(endReset());
   }
   renderOptions() {
     const { options, selectedOperator } = this.props;
