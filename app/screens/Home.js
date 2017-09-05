@@ -8,6 +8,8 @@ import { Header } from '../components/Header';
 import { Operators } from '../components/Operators';
 import { Box } from '../components/Box';
 import { DropBox } from '../components/DropBox';
+import { connectAlert } from '../components/Alert';
+
 import color from 'color';
 import {
   resetGame,
@@ -41,7 +43,8 @@ class Home extends Component {
     options: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
     resetting: PropTypes.bool.isRequired,
-    passCount: PropTypes.number
+    passCount: PropTypes.number,
+    alertWithType: PropTypes.func
   };
 
   handleChangeOperator(pressedOperator) {
@@ -60,9 +63,11 @@ class Home extends Component {
   }
 
   handlePressRestart() {
-    const { dispatch, selectedOperator } = this.props;
-    dispatch(resetGame(selectedOperator));
-    dispatch(resetCounters());
+    const { dispatch, selectedOperator, alertWithType } = this.props;
+    alertWithType('warn', 'Restart?', 'Press (X) to cancel');
+
+    // dispatch(resetGame(selectedOperator));
+    // dispatch(resetCounters());
   }
 
   componentWillUpdate(nextProps) {
@@ -85,9 +90,9 @@ class Home extends Component {
   }
   renderOptions() {
     const { options, selectedOperator } = this.props;
-    const currentOptions = options.map((option, i) =>
+    const currentOptions = options.map((option, i) => (
       <Box key={i} boxId={i} value={option} />
-    );
+    ));
     return currentOptions;
   }
   renderSuccess() {
@@ -101,10 +106,11 @@ class Home extends Component {
   }
   renderFail() {
     return (
-      !!this.props.total &&
-      <View style={styles.failBlock}>
-        <Text style={styles.failText}>Try again...</Text>
-      </View>
+      !!this.props.total && (
+        <View style={styles.failBlock}>
+          <Text style={styles.failText}>Try again...</Text>
+        </View>
+      )
     );
   }
   render() {
@@ -145,15 +151,14 @@ class Home extends Component {
               />
             </View>
             <View style={styles.result}>
-              <Text style={styles.resultText}>
-                {result}
-              </Text>
+              <Text style={styles.resultText}>{result}</Text>
             </View>
           </View>
-          {isFilled &&
+          {isFilled && (
             <View style={styles.message}>
               {isCorrect ? this.renderSuccess() : this.renderFail()}
-            </View>}
+            </View>
+          )}
           {this.renderOptions()}
         </View>
         <Operators
@@ -202,4 +207,4 @@ const select = state => {
   };
 };
 
-export default connect(select)(Home);
+export default connect(select)(connectAlert(Home));

@@ -1,6 +1,7 @@
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Provider } from 'react-redux';
+import { AlertProvider } from './components/Alert';
 import Navigator from './config/routes';
 import store from './config/store';
 import { viewPortHeight, viewPortWidth } from './config/screen';
@@ -32,7 +33,10 @@ EStyleSheet.build({
   // outline: 1
 });
 
-export default () =>
+export default () => (
   <Provider store={store}>
-    <Navigator onNavigatorStateChange />
-  </Provider>;
+    <AlertProvider>
+      <Navigator onNavigatorStateChange />
+    </AlertProvider>
+  </Provider>
+);
